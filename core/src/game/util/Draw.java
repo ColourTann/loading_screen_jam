@@ -4,13 +4,17 @@ import game.Main;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Draw {
-	// Non-centered stuff//
+	
+	//Texture stuff//
+	
+	//noncentered stuff//
 
 	public static void draw(Batch batch, Texture t, float x, float y) {
 		drawRotatedScaled(batch, t, x, y, 1, 1, 0);
@@ -35,7 +39,7 @@ public class Draw {
 				xFlip, yFlip);
 	}
 
-	// Centered stuff//
+	//centered stuff//
 
 	public static void drawCentered(Batch batch, Texture t, float x, float y) {
 		drawCenteredRotatedScaled(batch, t, x, y, 1, 1, 0);
@@ -66,6 +70,8 @@ public class Draw {
 				t.getWidth(), t.getHeight(), xFlip, yFlip);
 	}
 
+	//TextureRegion stuff//
+	
 	public static void draw(Batch batch, TextureRegion t, float x, float y) {
 		drawRotatedScaled(batch, t, x, y, 1, 1, 0);
 	}
@@ -82,9 +88,7 @@ public class Draw {
 				scaleX, scaleY, rad2deg(radianRotation));
 	}
 
-
-
-	// Centered stuff//
+	//centered stuff//
 
 	public static void drawCentered(Batch batch, TextureRegion t, float x,
 			float y) {
@@ -117,6 +121,8 @@ public class Draw {
 				t.getRegionHeight(), scaleX, scaleY, rad2deg(radianRotation));
 	}
 
+	//geometric stuff//
+	
 	public static void drawRectangle(Batch batch, float x, float y,
 			float width, float height, int lineWidth) {
 		drawScaled(batch, getSq(), x, y, width, lineWidth);
@@ -144,28 +150,8 @@ public class Draw {
 		Draw.drawRotatedScaled(batch, getSq(), x, y, dist, width, radians);
 	}
 
-	// Blending Junk
-	public enum BlendType {
-		Normal, Additive, MaxBuggy
-	}
-
-	public static void setBlend(Batch batch, BlendType type) {
-		switch (type) {
-		case Additive:
-			batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
-			break;
-		case Normal:
-			Gdx.gl20.glBlendEquation(GL20.GL_FUNC_ADD);
-			batch.setBlendFunction(GL20.GL_SRC_ALPHA,
-					GL20.GL_ONE_MINUS_SRC_ALPHA);
-			break;
-		case MaxBuggy:
-			Gdx.gl20.glBlendEquation(0x8008);
-			batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
-			break;
-		}
-	}
-
+	//utlities//
+	
 	public static float rad2deg(float rad) {
 		return (float) (rad * 180f / Math.PI);
 	}
@@ -177,6 +163,11 @@ public class Draw {
 			wSq = Main.atlas.findRegion("pixel");
 		}
 		return wSq;
+	}
+	
+	public static Pixmap getPixmap(Texture t){
+		t.getTextureData().prepare();
+		return t.getTextureData().consumePixmap();
 	}
 
 }

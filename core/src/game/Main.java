@@ -1,15 +1,22 @@
 package game;
 
 import game.screens.GameScreen;
+import game.screens.InputBlocker;
+import game.screens.PauseScreen;
+import game.util.Fonts;
 import game.util.Screen;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
@@ -22,6 +29,7 @@ public class Main extends ApplicationAdapter {
 	public static Main self;
 	Screen currentScreen;
 	Screen previousScreen;
+	public enum MainState{Normal, Paused}
 	@Override
 	public void create () {
 		self=this;
@@ -31,10 +39,45 @@ public class Main extends ApplicationAdapter {
 		batch = (SpriteBatch) stage.getBatch();
 		Gdx.input.setInputProcessor(stage);
 		setScreen(new GameScreen());
-		setScreen(new GameScreen(), TransitionType.LEFT, Interpolation.pow2Out, 1);
-		
+//		setScreen(new GameScreen(), TransitionType.LEFT, Interpolation.pow2Out, 1);
+		stage.addListener(new InputListener(){
+			public boolean keyDown (InputEvent event, int keycode) {
+				
+				switch(keycode){
+				case Keys.ESCAPE:
+					toggleMenu();
+					return false;
+				}
+				
+				return true;
+			}
+
+			
+		});
 	}
 	
+	private void toggleMenu() {
+		if(state!=MainState.Paused){
+			stage.addActor(InputBlocker.get());
+			stage.addActor(PauseScreen.get());
+			setState(MainState.Paused);
+		}
+		else {
+			InputBlocker.get().remove();
+			PauseScreen.get().remove();
+			setState(MainState.Normal);
+		}
+	}
+	
+	
+	
+	private MainState state=MainState.Normal;
+	public MainState getState(){
+		return state;
+	}
+	public void setState(MainState state){
+		this.state=state;
+	}
 	public enum TransitionType{LEFT};
 	public void setScreen(Screen screen, TransitionType type, Interpolation interp, float speed){
 		setScreen(screen);
@@ -61,8 +104,14 @@ public class Main extends ApplicationAdapter {
 		update(Gdx.graphics.getDeltaTime());
 		stage.draw();
 		batch.begin();
+		drawFPS(batch);
 		batch.end();
 	}
+	
+	public void drawFPS(Batch batch){
+		Fonts.font.draw(batch, "FPS: "+Gdx.graphics.getFramesPerSecond(), 0, Gdx.graphics.getHeight()-Fonts.font.getCapHeight());
+	}
+	
 	
 	public void update(float delta){
 		stage.act(delta);
@@ -71,6 +120,7 @@ public class Main extends ApplicationAdapter {
 	}
 	
 	public void useIntegerPositions(Screen screen){
+		if(screen==null)return;
 		screen.setPosition((int)screen.getX(), (int)screen.getY());
 	}
 }
