@@ -13,7 +13,7 @@ public class Clickable extends Actor{
 	boolean clicked;
 	
 	public Clickable() {
-		setSize((float)Math.random()*5, (float)Math.random()*30);
+		setSize((float)Math.random()*50, (float)Math.random()*30);
 		setPosition((float)Math.random()*Main.width, (float)Math.random()*Main.height);
 		addListener(new InputListener(){
 			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {

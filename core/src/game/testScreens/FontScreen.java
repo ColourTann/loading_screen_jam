@@ -10,6 +10,8 @@ import game.util.Screen;
 
 public class FontScreen extends Screen{
 
+	int fontX, fontY;
+	
 	@Override
 	public void preDraw(Batch batch) {
 	}
@@ -34,12 +36,14 @@ public class FontScreen extends Screen{
 		x+=100;
 		Fonts.pressStartP2.draw(batch, "Font: pressstartp2", x, y);
 		
-		Fonts.font.draw(batch, "another font", Gdx.input.getX(), Main.height-Gdx.input.getY());
+		Fonts.font.draw(batch, "another font", fontX, fontY);
 		
 	}
 
 	@Override
 	public void preTick(float delta) {
+		fontX=Gdx.input.getX();
+		fontY=Main.height-Gdx.input.getY();
 	}
 
 	@Override

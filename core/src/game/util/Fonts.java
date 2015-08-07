@@ -1,5 +1,6 @@
 package game.util;
 
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
@@ -43,4 +44,3 @@ public class Fonts {
 		return f;
 	}
 }
-

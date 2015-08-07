@@ -1,6 +1,7 @@
 package game.screens;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.utils.Pools;
 
 import game.Main;
 import game.util.Colours;
@@ -17,7 +18,7 @@ public class GameScreen extends Screen{
 	@Override
 	public void preDraw(Batch batch) {
 		batch.setColor(Colours.brown);
-		Draw.fillRectangle(batch, getX(), getY(), getWidth()-5, getHeight());
+		Draw.fillRectangle(batch, getX(), getY(), getWidth(), getHeight());
 	}
 	
 	@Override
@@ -32,6 +33,7 @@ public class GameScreen extends Screen{
 	@Override
 	public void postTick(float delta) {
 	}
+
 
 	
 }

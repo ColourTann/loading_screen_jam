@@ -1,39 +1,69 @@
 package game.util;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class Colours {
 
 	// DB16 Palette//
-	public static final Color dark = make(20, 12, 28);
-	public static final Color darkRed = make(68, 36, 52);
-	public static final Color darkBlue = make(48, 52, 109);
-	public static final Color darkGrey = make(78, 74, 78);
-	public static final Color brown = make(133, 76, 48);
-	public static final Color green = make(52, 101, 36);
-	public static final Color red = make(208, 70, 72);
-	public static final Color grey = make(117, 113, 97);
-	public static final Color blue = make(89, 125, 206);
-	public static final Color orange = make(210, 125, 44);
-	public static final Color lightGrey = make(133, 149, 161);
-	public static final Color lightGreen = make(109, 170, 44);
-	public static final Color pink = make(210, 170, 153);
-	public static final Color lightBlue = make(109, 194, 202);
-	public static final Color yellow = make(218, 212, 94);
-	public static final Color light = make(222, 238, 214);
+	public static final Color dark;
+	public static final Color greenDark;
+	public static final Color green;
+	public static final Color light;
 	
-	public static final Color _white = new Color(1,1,1,1);
-
-	public static Color[] colourList = new Color[] { dark, darkRed, darkBlue,
-			darkGrey, brown, green, red, grey, blue, orange, lightGrey,
-			lightGreen, pink, lightBlue, yellow, light };
-
-	public static Color randomColor() {
-		return colourList[(int) (Math.random() * colourList.length)];
+	public static final Color brownRusty;
+	public static final Color brown;
+	public static final Color orange;
+	public static final Color red;
+	
+	public static final Color blueDark;
+	public static final Color blue;
+	public static final Color blueLight;
+	public static final Color pink;
+	
+	public static final Color greyDark;
+	public static final Color grey;
+	public static final Color yellowDark;
+	public static final Color yellow;
+	
+	public static final Color white = new Color(1,1,1,1);
+	private static Pixmap p;
+	static{
+		Texture t = new Texture(Gdx.files.internal("palette.png"));
+		p = Draw.getPixmap(t);
+		dark = palette(0,0);
+		greenDark = palette(0,1);
+		green= palette(0,2);
+		light = palette(0,3);
+		
+		brownRusty= palette(1,0);
+		brown = palette(1,1);
+		orange= palette(1,2);
+		red = palette(1,3);
+		
+		blueDark= palette(2,0);
+		blue = palette(2,1);
+		blueLight= palette(2,2);
+		pink = palette(2,3);
+		
+		greyDark= palette(3,0);
+		grey = palette(3,1);
+		yellowDark= palette(3,2);
+		yellow = palette(3,3);
+	}
+	
+	public static Color palette(int x, int y){
+		return new Color(p.getPixel(x, y));
+	}
+	
+	public static void setup(){
+		
 	}
 
-	public static Color yesIReallyWantToUseColourWithAlpha(Color c, float alpha) {
+	public static Color withAlpha(Color c, float alpha) {
 		return new Color(c.r, c.g, c.b, alpha);
 	}
 
@@ -74,11 +104,7 @@ public class Colours {
 		float wiggle = .01f;
 		return r < wiggle && g < wiggle && b < wiggle;
 	}
-
-	public static void setBatchColour(Batch batch, Color c) {
-		batch.setColor(c.r, c.g, c.b, c.a);
-	}
-
+	
 	public static void setBatchColour(Batch batch, Color c, float a) {
 		batch.setColor(c.r, c.g, c.b, a);
 	}
