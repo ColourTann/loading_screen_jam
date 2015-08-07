@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import game.Main;
 import game.util.Colours;
 import game.util.Draw;
+import game.util.Fonts;
 import game.util.Screen;
 
 public class GameScreen extends Screen{
@@ -21,7 +22,15 @@ public class GameScreen extends Screen{
 	
 	@Override
 	public void postDraw(Batch batch) {
-		
+		Fonts.love.draw(batch, "sdioufsiudfh", 50, 50);
+	}
+
+	@Override
+	public void preTick(float delta) {
+	}
+
+	@Override
+	public void postTick(float delta) {
 	}
 
 	

@@ -1,6 +1,7 @@
 package game;
 
 import game.screens.GameScreen;
+import game.testScreens.FontScreen;
 import game.util.Screen;
 
 import com.badlogic.gdx.ApplicationAdapter;
@@ -14,7 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
 public class Main extends ApplicationAdapter {
-	public static int width=800,height=640;
+	public static int width=400,height=320;
 	SpriteBatch batch;
 	Stage stage;
 	OrthographicCamera cam;
@@ -30,8 +31,8 @@ public class Main extends ApplicationAdapter {
 		cam =(OrthographicCamera) stage.getCamera();
 		batch = (SpriteBatch) stage.getBatch();
 		Gdx.input.setInputProcessor(stage);
-		setScreen(new GameScreen());
-		setScreen(new GameScreen(), TransitionType.LEFT, Interpolation.pow2Out, 1);
+		setScreen(new FontScreen());
+//		setScreen(new GameScreen(), TransitionType.LEFT, Interpolation.pow2Out, 1);
 		
 	}
 	
@@ -66,11 +67,6 @@ public class Main extends ApplicationAdapter {
 	
 	public void update(float delta){
 		stage.act(delta);
-		useIntegerPositions(currentScreen);
-		useIntegerPositions(previousScreen);
 	}
 	
-	public void useIntegerPositions(Screen screen){
-		screen.setPosition((int)screen.getX(), (int)screen.getY());
-	}
 }

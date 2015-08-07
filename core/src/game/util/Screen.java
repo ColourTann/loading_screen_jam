@@ -20,4 +20,15 @@ public abstract class Screen extends Group{
 	}
 	public abstract void preDraw(Batch batch);
 	public abstract void postDraw(Batch batch);
+	
+	@Override
+	public void act(float delta) {
+		setPosition((int)getX(), (int)getY());
+		preTick(delta);
+		super.act(delta);
+		postTick(delta);
+	}
+	
+	public abstract void preTick(float delta);
+	public abstract void postTick(float delta);
 }
