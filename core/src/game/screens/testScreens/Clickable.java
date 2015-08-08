@@ -1,4 +1,4 @@
-package game.testScreens;
+package game.screens.testScreens;
 
 import game.Main;
 import game.util.Colours;

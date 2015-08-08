@@ -1,4 +1,4 @@
-package game.testScreens;
+package game.screens.testScreens;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.utils.Align;

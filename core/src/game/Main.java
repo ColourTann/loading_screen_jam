@@ -1,10 +1,10 @@
 package game;
 
-import game.testScreens.FontScreen;
-import game.testScreens.GameScreen;
-import game.testScreens.StartScreen;
 import game.screens.pause.InputBlocker;
 import game.screens.pause.PauseScreen;
+import game.screens.testScreens.FontScreen;
+import game.screens.testScreens.GameScreen;
+import game.screens.testScreens.StartScreen;
 import game.util.Colours;
 import game.util.Fonts;
 import game.util.Screen;

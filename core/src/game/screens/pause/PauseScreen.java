@@ -2,9 +2,9 @@ package game.screens.pause;
 
 import game.Main;
 import game.Main.TransitionType;
-import game.testScreens.FontScreen;
-import game.testScreens.GameScreen;
-import game.testScreens.StartScreen;
+import game.screens.testScreens.FontScreen;
+import game.screens.testScreens.GameScreen;
+import game.screens.testScreens.StartScreen;
 import game.util.Border;
 import game.util.Screen;
 import game.util.Slider;
