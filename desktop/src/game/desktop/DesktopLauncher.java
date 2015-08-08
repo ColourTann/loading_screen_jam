@@ -20,7 +20,7 @@ public class DesktopLauncher {
 		Settings settings = new Settings();
 		settings.combineSubdirectories = true;
 		TexturePacker.process(settings, "../images", "../core/assets", "atlas_image");
-		config.title="ReplaceMe";
+		config.title="Template";
 		config.addIcon("icon.png", FileType.Internal);
 
 		

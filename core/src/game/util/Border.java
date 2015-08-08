@@ -9,14 +9,19 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class Border {
 
 	static Color bg = Colours.dark;
+	static Color mousedColour = Colours.grey;
 	static TextureRegion corner = Main.atlas.findRegion("corner");
 	static TextureRegion edge = Main.atlas.findRegion("edge");
 	
-	public static void draw(Batch batch, float x, float y, float width, float height){
+	public static void draw(Batch batch, float fX, float fY, float fWidth, float fHeight, boolean moused){
 		int offset=corner.getRegionWidth(); //offset to avoid background rectangle and edges going past corners//
+		int x = (int)fX;
+		int y = (int)fY;
+		int width = (int)fWidth;
+		int height = (int)fHeight;
 		
 		//background//
-		batch.setColor(bg);
+		batch.setColor(moused?mousedColour:bg);
 		Draw.fillRectangle(batch, x+offset, y+offset, width-offset*2, height-offset*2);
 		
 		//corners//

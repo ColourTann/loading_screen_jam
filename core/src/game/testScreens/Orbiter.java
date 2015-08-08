@@ -1,4 +1,4 @@
-package game.screens;
+package game.testScreens;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 
@@ -8,17 +8,22 @@ import game.util.Particle;
 
 public class Orbiter extends Particle{
 
-	Orbiter() {
+	Orbiter(float x, float y) {
 		setupLife(.5f);
-		x=rand(0,Main.width);
-		y=rand(0,Main.height);
-		dx=rand(-200,200);
-		dy=rand(-200,200);
+		this.x=x;
+		this.y=y;
+		float angle = (float) (Math.random()*Math.PI*2);
+		float magnitude = (float) (Math.random()*800);
+		dx=(float) (Math.sin(angle)*magnitude);
+		dy=(float) (Math.cos(angle)*magnitude);
 		dead=false;	
 	}
 	
+	float drag=.05f;
 	@Override
 	public void tick(float delta) {
+		dx *=Math.pow(drag, delta);
+		dy *=Math.pow(drag, delta);
 		x+=dx*delta;
 		y+=dy*delta;
 		

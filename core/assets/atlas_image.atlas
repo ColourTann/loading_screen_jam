@@ -7,15 +7,15 @@ repeat: none
 corner
   rotate: false
   xy: 2, 5
-  size: 9, 9
-  orig: 9, 9
+  size: 4, 4
+  orig: 4, 4
   offset: 0, 0
   index: -1
 edge
   rotate: false
   xy: 36, 39
-  size: 1, 9
-  orig: 1, 9
+  size: 1, 4
+  orig: 1, 4
   offset: 0, 0
   index: -1
 pixel
@@ -27,7 +27,7 @@ pixel
   index: -1
 shiptiny
   rotate: false
-  xy: 2, 16
+  xy: 2, 11
   size: 32, 32
   orig: 32, 32
   offset: 0, 0

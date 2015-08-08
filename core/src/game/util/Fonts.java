@@ -3,8 +3,12 @@ package game.util;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 
 public class Fonts {
+	
+	public static GlyphLayout bounds = new GlyphLayout();
+	
 	public static BitmapFont love; // size 8 //
 	public static BitmapFont pixelMix; // size 8 //
 	public static BitmapFont O4B03; // size 8 //
@@ -17,7 +21,7 @@ public class Fonts {
 	
 	public static BitmapFont[] fontSizes = new BitmapFont[10];
 	
-	static{
+	public static void setup(){
 		love = loadFont("pixel-love");
 		pixelMix = loadFont("pixelmix");
 		O4B03 = loadFont("04B_03");
@@ -25,7 +29,7 @@ public class Fonts {
 		pixelArial = loadFont("pixelarial");
 		visitor = loadFont("visitor");
 		
-		font = love;
+		font = pixelMix;
 		largeFont=loadFont("pixel-love", 4);
 		
 		for(int i=0;i<fontSizes.length;i++){

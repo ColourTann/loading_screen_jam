@@ -1,4 +1,4 @@
-package game.screens;
+package game.screens.pause;
 
 import game.Main;
 

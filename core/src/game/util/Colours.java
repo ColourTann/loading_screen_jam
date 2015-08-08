@@ -12,7 +12,7 @@ public class Colours {
 	public static final Color dark;
 	public static final Color greenDark;
 	public static final Color green;
-	public static final Color light;
+	public static final Color yellow;
 	
 	public static final Color brownRusty;
 	public static final Color brown;
@@ -27,7 +27,7 @@ public class Colours {
 	public static final Color greyDark;
 	public static final Color grey;
 	public static final Color yellowDark;
-	public static final Color yellow;
+	public static final Color light;
 	
 	public static final Color white = new Color(1,1,1,1);
 	private static Pixmap p;
@@ -37,7 +37,7 @@ public class Colours {
 		dark = palette(0,0);
 		greenDark = palette(0,1);
 		green= palette(0,2);
-		light = palette(0,3);
+		yellow = palette(0,3);
 		
 		brownRusty= palette(1,0);
 		brown = palette(1,1);
@@ -52,17 +52,13 @@ public class Colours {
 		greyDark= palette(3,0);
 		grey = palette(3,1);
 		yellowDark= palette(3,2);
-		yellow = palette(3,3);
+		light = palette(3,3);
 	}
 	
 	public static Color palette(int x, int y){
 		return new Color(p.getPixel(x, y));
 	}
 	
-	public static void setup(){
-		
-	}
-
 	public static Color withAlpha(Color c, float alpha) {
 		return new Color(c.r, c.g, c.b, alpha);
 	}

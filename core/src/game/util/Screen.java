@@ -14,7 +14,7 @@ public abstract class Screen extends Group{
 	private ArrayList<Particle> particles = new ArrayList<Particle>();
 	private ArrayList<Particle> newParticles = new ArrayList<Particle>();
 	public Screen() {
-
+		setSize(Main.width, Main.height);
 	}
 	
 	@Override
@@ -30,12 +30,12 @@ public abstract class Screen extends Group{
 	
 	@Override
 	public void act(float delta) {
-		setPosition((int)getX(), (int)getY());
 		if(Main.self.getState()==MainState.Paused)return;
 		tickParticles(delta);
 		preTick(delta);
 		super.act(delta);
 		postTick(delta);
+		setPosition((int)getX(), (int)getY());
 	}
 	
 	public abstract void preTick(float delta);
@@ -47,11 +47,10 @@ public abstract class Screen extends Group{
 	private void tickParticles(float delta) {
 		particles.addAll(newParticles);
 		newParticles.clear();
-		for(int i=particles.size()-1;i>=0;){
+		for(int i=particles.size()-1;i>=0;i--){
 			Particle p = particles.get(i);
 			p.act(delta);
 			if(p.dead)particles.remove(p);
-			else i--;
 		}
 	}
 

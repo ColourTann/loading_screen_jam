@@ -1,4 +1,4 @@
-package game.screens;
+package game.testScreens;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.utils.Pools;
@@ -10,9 +10,16 @@ import game.util.Fonts;
 import game.util.Screen;
 
 public class GameScreen extends Screen{
+	
+	private static GameScreen self;
+	public static GameScreen get(){
+		if(self==null) self= new GameScreen();
+		return self;
+	}
+	
 	public GameScreen() {
 		setSize(Main.width, Main.height);
-		for(int i=0;i<50;i++)addActor(new Clickable());
+		for(int i=0;i<30;i++)addActor(new Clickable());
 	}
 	
 	@Override
@@ -23,7 +30,6 @@ public class GameScreen extends Screen{
 	
 	@Override
 	public void postDraw(Batch batch) {
-		Fonts.love.draw(batch, "sdioufsiudfh", 50, 50);
 	}
 
 	@Override
@@ -33,6 +39,8 @@ public class GameScreen extends Screen{
 	@Override
 	public void postTick(float delta) {
 	}
+
+	
 
 
 	
