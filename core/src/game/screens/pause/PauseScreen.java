@@ -4,6 +4,7 @@ import game.Main;
 import game.Main.TransitionType;
 import game.screens.testScreens.FontScreen;
 import game.screens.testScreens.GameScreen;
+import game.screens.testScreens.SoundScreen;
 import game.screens.testScreens.StartScreen;
 import game.util.Border;
 import game.util.Screen;
@@ -29,7 +30,7 @@ public class PauseScreen extends Group{
 		setSize(w,h);
 		setPosition(Main.width/2-w/2, Main.height/2-h/2);
 		int width = (w-TextBox.gap*4)/3;
-		addTransitionButton("boring", StartScreen.get(), (width+TextBox.gap)*0,0, width);
+		addTransitionButton("sound", SoundScreen.get(), (width+TextBox.gap)*0,0, width);
 		addTransitionButton("clicking", GameScreen.get(), (width+TextBox.gap)*1,0, width);
 		addTransitionButton("fonts", FontScreen.get(), (width+TextBox.gap)*2,0, width);
 		

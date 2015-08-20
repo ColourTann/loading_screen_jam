@@ -31,7 +31,7 @@ public class Clickable extends Actor{
 				addAction(Actions.color(Colours.light, .5f, Interpolation.pow2Out));
 				toFront();
 				for(int i=0;i<100;i++)GameScreen.get().addParticle(new Orbiter(getX(Align.center), getY(Align.center)));
-				Sounds.get("win", Sound.class).play(Slider.SFX.getValue());
+				
 				return true;
 			}
 			public void touchUp (InputEvent event, float x, float y, int pointer, int button) {

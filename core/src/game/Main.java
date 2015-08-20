@@ -6,6 +6,7 @@ import game.screens.testScreens.FontScreen;
 import game.screens.testScreens.GameScreen;
 import game.screens.testScreens.StartScreen;
 import game.util.Colours;
+import game.util.Draw;
 import game.util.Fonts;
 import game.util.Screen;
 import game.util.Slider;
@@ -18,14 +19,18 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap.Format;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 
 
 public class Main extends ApplicationAdapter {
@@ -36,8 +41,11 @@ public class Main extends ApplicationAdapter {
 	public static TextureAtlas atlas;
 	public static Main self;
 	public static int scale=1;
+	public static boolean debug = true;
 	Screen currentScreen;
 	Screen previousScreen;
+	FrameBuffer buffer;
+	public static float ticks;
 	public enum MainState{Normal, Paused}
 	@Override
 	public void create () {
@@ -48,18 +56,12 @@ public class Main extends ApplicationAdapter {
 		
 		
 		
+		buffer = new FrameBuffer(Format.RGBA8888, Main.width, Main.height, false);
 		atlas= new TextureAtlas(Gdx.files.internal("atlas_image.atlas"));
-		stage = new Stage();
+		stage = new Stage(new FitViewport(Main.width, Main.height));
 		cam =(OrthographicCamera) stage.getCamera();
 		batch = (SpriteBatch) stage.getBatch();
 		Gdx.input.setInputProcessor(stage);
-		
-		
-		setScreen(new StartScreen());
-//		setScreen(new FontScreen());
-		
-
-
 		stage.addListener(new InputListener(){
 			public boolean keyDown (InputEvent event, int keycode) {
 				
@@ -74,6 +76,10 @@ public class Main extends ApplicationAdapter {
 
 			
 		});
+
+		setScale(3);
+		setScreen(new StartScreen());	
+	
 	}
 	
 	public void setScale(int scale){
@@ -130,22 +136,38 @@ public class Main extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(Colours.dark.r, Colours.dark.g, Colours.dark.b, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
 		update(Gdx.graphics.getDeltaTime());
+		
+		buffer.bind();
+		buffer.begin();
+		batch.begin();
+		batch.setColor(Colours.dark);
+		batch.setProjectionMatrix(cam.combined);
+		Draw.fillRectangle(batch, 0, 0, Main.width, Main.height);
+		batch.end();
 		stage.draw();
 		batch.begin();
-		drawFPS(batch);
+
+		if(Main.debug)drawFPS(batch);
+		batch.end();
+		buffer.end();
+
+		batch.begin();
+		batch.setColor(1,1,1,1);
+		buffer.getColorBufferTexture().setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
+		Draw.drawRotatedScaledFlipped(batch, buffer.getColorBufferTexture(), 0, 0, 1, 1, 0, false, true);
 		batch.end();
 	}
 	
 	public void drawFPS(Batch batch){
-		Fonts.font.setColor(Colours.green);
-		Fonts.font.draw(batch, "FPS: "+Gdx.graphics.getFramesPerSecond(), 0, stage.getHeight());
+		Fonts.font.setColor(Colours.light);
+		Fonts.font.draw(batch, "FPS: "+Gdx.graphics.getFramesPerSecond(), 0, Main.height);
 	}
 	
 	
 	public void update(float delta){
+		ticks+=delta;
 		Sounds.tickFaders(delta);
 		stage.act(delta);
 	}

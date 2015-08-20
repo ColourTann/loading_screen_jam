@@ -5,13 +5,20 @@ import com.badlogic.gdx.utils.Align;
 
 import game.util.Fonts;
 import game.util.Screen;
+import game.util.TextBox;
 
 public class StartScreen extends Screen{
 
+	
+	
 	private static StartScreen self;
 	public static StartScreen get(){
 		if(self==null) self= new StartScreen();
 		return self;
+	}
+	
+	public StartScreen() {
+
 	}
 	
 	@Override
@@ -20,11 +27,13 @@ public class StartScreen extends Screen{
 
 	@Override
 	public void postDraw(Batch batch) {
-		Fonts.font.draw(batch, "Press esc to get to the menu", getX()+getWidth()/2, getY()+getHeight()/2, 0, Align.center, false);
+//		Fonts.font.draw(batch, "Press esc to get to the menu", getX()+getWidth()/2, getY()+getHeight()/2, 0, Align.center, false);
 	}
 
 	@Override
 	public void preTick(float delta) {
+
+		
 	}
 
 	@Override

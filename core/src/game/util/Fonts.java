@@ -1,6 +1,8 @@
 package game.util;
 
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
@@ -9,32 +11,36 @@ public class Fonts {
 	
 	public static GlyphLayout bounds = new GlyphLayout();
 	
-	public static BitmapFont love; // size 8 //
-	public static BitmapFont pixelMix; // size 8 //
-	public static BitmapFont O4B03; // size 8 //
-	public static BitmapFont pressStartP2; // size 8 //
-	public static BitmapFont pixelArial; // size 8 //
-	public static BitmapFont visitor; // size 10 //
+	public static BitmapFont pixelfraktur; //16
+	public static BitmapFont helvetipixel; //14
+	public static BitmapFont battlenet; //13
+	public static BitmapFont pixelarial; //12
+	public static BitmapFont tinyunicode; //12
+	public static BitmapFont visitor; //9
+	public static BitmapFont o4b3; //8
+	public static BitmapFont pixelmix; //8
 	
+
 	public static BitmapFont font;
 	public static BitmapFont largeFont;
 	
 	public static BitmapFont[] fontSizes = new BitmapFont[10];
 	
 	public static void setup(){
-		love = loadFont("pixel-love");
-		pixelMix = loadFont("pixelmix");
-		O4B03 = loadFont("04B_03");
-		pressStartP2 = loadFont("PressStartP2");
-		pixelArial = loadFont("pixelarial");
-		visitor = loadFont("visitor");
+		pixelfraktur = loadFont("pixelfraktur");
+		o4b3 = loadFont("o4b3");
+		helvetipixel= loadFont("helvetipixel");
+		pixelarial= loadFont("pixelarial");
+		pixelmix= loadFont("pixelmix");
+		tinyunicode= loadFont("tinyunicode");
+		visitor= loadFont("visitor");
+		battlenet= loadFont("battlenet");
+		font = battlenet;
 		
-		font = pixelMix;
-		largeFont=loadFont("pixel-love", 4);
-		
-		for(int i=0;i<fontSizes.length;i++){
-			fontSizes[i]=loadFont("pixelmix", i+1);
+		for(int i=0;i<10;i++){
+			fontSizes[i]=loadFont("battlenet", i+1);
 		}
+		
 	}
 	
 	private static BitmapFont loadFont(String name){

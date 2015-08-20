@@ -5,7 +5,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 import game.Main;
 import game.util.Fonts;
+import game.util.Mouse;
 import game.util.Screen;
+import game.util.TextWisp;
 
 public class FontScreen extends Screen{
 
@@ -25,31 +27,31 @@ public class FontScreen extends Screen{
 	public void postDraw(Batch batch) {
 		
 		for(int i=0;i<4;i++){
-			Fonts.fontSizes[i].draw(batch, "Different sizes!", getX()+0, getY()-30+(float) (getHeight()-(Math.pow(i, 1.98)+i*1)*5));
-			System.out.println(getY()-30+(float) (Gdx.graphics.getHeight()-(Math.pow(i, 1.98)+i*1)*5));
+			Fonts.fontSizes[i].draw(batch, "Different sizes!", getX()+0, getY()-30+(float) (getHeight()-(Math.pow(i+.5, 2.3)+i*1)*5));
 		}
 		int x= 10; int y=50;
-		Fonts.love.draw(batch, "Font: pixel-love", getX()+x, getY()+y);
+		Fonts.battlenet.draw(batch, "Font: battlenet", getX()+x, getY()+y);
 		x+=100;
-		Fonts.O4B03.draw(batch, "Font: 04B03", getX()+x, y);
+		Fonts.helvetipixel.draw(batch, "Font: helvetipixel", getX()+x, y);
 		x+=100;
-		Fonts.pixelArial.draw(batch, "Font: pixelarial", getX()+x, getY()+y);
+		Fonts.pixelarial.draw(batch, "Font: pixelarial", getX()+x, getY()+y);
 		x=10;
 		y+=50;
-		Fonts.pixelMix.draw(batch, "Font: pixelmix", getX()+x, getY()+y);
+		Fonts.o4b3.draw(batch, "Font: 04b3", getX()+x, getY()+y);
 		x+=100;
 		Fonts.visitor.draw(batch, "Font: visitor", getX()+x, getY()+y);
 		x+=100;
-		Fonts.pressStartP2.draw(batch, "Font: pressstartp2", getX()+x, getY()+y);
+		Fonts.pixelmix.draw(batch, "Font: pixelmix", getX()+x, getY()+y);
 		
-		Fonts.font.draw(batch, "another font", getX()+fontX, getY()+fontY);
+
 		
 	}
 
 	@Override
 	public void preTick(float delta) {
-		fontX=Gdx.input.getX();
-		fontY=Main.height-Gdx.input.getY();
+		fontX=Mouse.getX();
+		fontY=Mouse.getY();
+		addParticle(new TextWisp("more words!", fontX, fontY));
 	}
 
 	@Override
