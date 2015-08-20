@@ -16,9 +16,13 @@ public class Sounds {
 	public static void setup(){
 		//sfx//
 		makeSound("sfx/win.wav", Sound.class);
+		makeSound("sfx/jump0.wav", Sound.class);
+		makeSound("sfx/land0.wav", Sound.class);
 		
 		//music//
 		makeSound("sfx/ambience.ogg", Music.class);
+		makeSound("sfx/1.ogg", Music.class);
+		makeSound("sfx/2.ogg", Music.class);
 		
 		//stuff to attempt to load sounds properly//
 		am.finishLoading();
@@ -57,6 +61,20 @@ public class Sounds {
 			f.tick(delta);
 			if(f.done)faders.remove(f);
 		}
+	}
+	
+	private static Music previousMusic;
+	private static Music currentMusic;
+	public static void playMusic(Music m){
+		previousMusic=currentMusic;
+		if(previousMusic!=null)previousMusic.stop();
+		currentMusic=m;
+		currentMusic.play();
+		updateMusicVolume();
+	}
+	
+	public static void updateMusicVolume(){
+		if(currentMusic!=null)currentMusic.setVolume(Slider.music.getValue());
 	}
 	
 	static class Fader{

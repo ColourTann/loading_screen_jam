@@ -12,9 +12,22 @@ import com.badlogic.gdx.utils.Align;
 
 
 public class Slider extends Actor{
+	final static int defaultWidth=250, defaultHeight=30;
+	final static int gap=4;
+	
+	//preset sliders//
 	public static Slider SFX=  new Slider("SFX", .5f, Colours.greyDark, Colours.grey);
 	public static Slider music=  new Slider("Music", .5f, Colours.greyDark, Colours.grey);
-	static float w=250,h=30, gap=4;
+	static{
+		music.addSlideAction(new Runnable() {
+			
+			@Override
+			public void run() {
+				Sounds.updateMusicVolume();
+			}
+		});
+	}
+	
 	
 	private float value;
 	private Color backGround, foreGround;
@@ -24,7 +37,8 @@ public class Slider extends Actor{
 		this.title=title;
 		value=base;
 		backGround=bg; foreGround=fg;
-		setSize(w, h);
+		setSize(defaultWidth, defaultHeight);
+		
 		addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
