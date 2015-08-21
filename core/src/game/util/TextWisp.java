@@ -32,6 +32,4 @@ public class TextWisp extends Particle{
 		Fonts.font.getColor().a=ratio;
 		Fonts.font.draw(batch, text, x, y, 0, Align.center, false);
 	}
-	
-
 }

@@ -34,7 +34,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 
 public class Main extends ApplicationAdapter {
-	public static int width=400,height=320;
+	public static int width=600,height=420;
 	SpriteBatch batch;
 	Stage stage;
 	OrthographicCamera cam;
