@@ -2,6 +2,7 @@ package game.screens.testScreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 import game.Main;
 import game.util.Fonts;
@@ -42,6 +43,22 @@ public class FontScreen extends Screen{
 		Fonts.visitor.draw(batch, "Font: visitor", getX()+x, getY()+y);
 		x+=100;
 		Fonts.pixelmix.draw(batch, "Font: pixelmix", getX()+x, getY()+y);
+		x=10;
+		y+=50;
+		Fonts.tinyunicode.draw(batch, "Font: tinyunicode", getX()+x, getY()+y);
+		x+=100;
+		Fonts.pressstartp2.draw(batch, "Font: presstartp2", getX()+x, getY()+y);
+		
+		/*
+		 * public static BitmapFont pixelfraktur; //16
+	public static BitmapFont helvetipixel; //14
+	public static BitmapFont battlenet; //13
+	public static BitmapFont pixelarial; //12
+	public static BitmapFont tinyunicode; //12
+	public static BitmapFont visitor; //9
+	public static BitmapFont o4b3; //8
+	public static BitmapFont pixelmix; //8
+		 */
 		
 
 		

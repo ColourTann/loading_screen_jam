@@ -11,7 +11,6 @@ public class Fonts {
 	
 	public static GlyphLayout bounds = new GlyphLayout();
 	
-	public static BitmapFont pixelfraktur; //16
 	public static BitmapFont helvetipixel; //14
 	public static BitmapFont battlenet; //13
 	public static BitmapFont pixelarial; //12
@@ -19,6 +18,7 @@ public class Fonts {
 	public static BitmapFont visitor; //9
 	public static BitmapFont o4b3; //8
 	public static BitmapFont pixelmix; //8
+	public static BitmapFont pressstartp2; //8
 	
 
 	public static BitmapFont font;
@@ -27,7 +27,6 @@ public class Fonts {
 	public static BitmapFont[] fontSizes = new BitmapFont[10];
 	
 	public static void setup(){
-		pixelfraktur = loadFont("pixelfraktur");
 		o4b3 = loadFont("o4b3");
 		helvetipixel= loadFont("helvetipixel");
 		pixelarial= loadFont("pixelarial");
@@ -35,6 +34,7 @@ public class Fonts {
 		tinyunicode= loadFont("tinyunicode");
 		visitor= loadFont("visitor");
 		battlenet= loadFont("battlenet");
+		pressstartp2= loadFont("pressstartp2");
 		font = battlenet;
 		
 		for(int i=0;i<10;i++){

@@ -2,22 +2,16 @@ package game;
 
 import game.screens.pause.InputBlocker;
 import game.screens.pause.PauseScreen;
-import game.screens.testScreens.FontScreen;
-import game.screens.testScreens.GameScreen;
 import game.screens.testScreens.StartScreen;
 import game.util.Colours;
 import game.util.Draw;
 import game.util.Fonts;
 import game.util.Screen;
-import game.util.Slider;
 import game.util.Sounds;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;

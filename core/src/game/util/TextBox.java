@@ -62,6 +62,7 @@ public class TextBox extends Actor{
 				moused=true;
 			}
 			public void exit (InputEvent event, float x, float y, int pointer, Actor toActor) {
+				if(toActor==TextBox.this) return;
 				moused=false;
 			}
 		});
@@ -92,9 +93,6 @@ public class TextBox extends Actor{
 		this.text=text;
 		this.wrapWidth=boxWidth-gap*2;
 		Fonts.bounds.setText(font, text, dummyColor, wrapWidth, Align.center, true);
-
-		setSize(boxWidth, (int)(gap*2+Fonts.bounds.height));
-
 		fontHeight= (int) (Fonts.bounds.height/2+getHeight()/2);
 		fontHeight=0;
 		fontHeight=(int) (getHeight()-gap);		
@@ -218,7 +216,7 @@ public class TextBox extends Actor{
 				false);
 		
 
-		
+		setSize(bufferWidth, bufferHeight);
 		bufferCam = new OrthographicCamera(buffer.getWidth(), buffer.getHeight());
 		
 		bufferCam.translate((int)(buffer.getWidth()/2), (int)(buffer.getHeight()/2));
