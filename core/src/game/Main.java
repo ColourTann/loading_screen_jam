@@ -77,7 +77,7 @@ public class Main extends ApplicationAdapter {
 			
 		});
 
-		setScale(3);
+		setScale(scale);
 		setScreen(new StartScreen());	
 	
 	}
