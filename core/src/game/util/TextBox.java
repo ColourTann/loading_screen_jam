@@ -98,7 +98,7 @@ public class TextBox extends Actor{
 		fontHeight= (int) (Fonts.bounds.height/2+getHeight()/2);
 		fontHeight=0;
 		fontHeight=(int) (getHeight()-gap);		
-		setupLines(text, wrapWidth);
+		setupLines(text);
 	}
 
 	@Override
@@ -128,7 +128,7 @@ public class TextBox extends Actor{
 	SpriteBatch batch = new SpriteBatch();
 	OrthographicCamera bufferCam;
 	int baseLineHeight =  (int) font.getLineHeight();
-	private void setupLines(String entireText, int wrapWidth){
+	private void setupLines(String entireText){
 
 		int currentX=gap;
 		int currentY=gap;
@@ -208,13 +208,17 @@ public class TextBox extends Actor{
 			currentLine.setY(currentY);
 			lines.add(currentLine);
 		}
+		int bufferWidth=(int)(wrapWidth+gap*1);
+		int bufferHeight=(int) (currentY+gap*2+(lineHeight-baseLineHeight));
+		if(bufferWidth%2!=0)bufferWidth++;
+		if(bufferHeight%2!=0)bufferHeight++;
 		buffer = new FrameBuffer(Format.RGBA8888,
-				(int)(wrapWidth+gap*2),
-				(int) (currentY+gap*2+(lineHeight-baseLineHeight)),
+				bufferWidth,
+				bufferHeight,
 				false);
 		
 
-
+		
 		bufferCam = new OrthographicCamera(buffer.getWidth(), buffer.getHeight());
 		
 		bufferCam.translate((int)(buffer.getWidth()/2), (int)(buffer.getHeight()/2));
@@ -275,7 +279,7 @@ public class TextBox extends Actor{
 
 			int bonusX=0;
 			if(align == Align.center){
-				bonusX=(wrapWidth+gap-width)/2;
+				bonusX=(wrapWidth-width)/2;
 			}
 			
 			for(TextPosition tp: textPositions) tp.render(batch, bonusX, y);
