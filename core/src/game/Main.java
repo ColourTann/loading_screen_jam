@@ -43,6 +43,9 @@ public class Main extends ApplicationAdapter {
 	public enum MainState{Normal, Paused}
 	@Override
 	public void create () {
+		
+		
+		
 		self=this;
 		
 		Sounds.setup();

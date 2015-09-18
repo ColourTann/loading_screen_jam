@@ -7,6 +7,7 @@ import game.Main;
 import game.util.Fonts;
 import game.util.Screen;
 import game.util.TextBox;
+import game.util.TextRenderer;
 
 public class StartScreen extends Screen{
 
@@ -20,22 +21,21 @@ public class StartScreen extends Screen{
 	}
 
 	public StartScreen() {
-		TextBox.setImage("test", Main.atlas.findRegion("shiptiny"));
-		TextBox.setImage("grass", Main.atlas.findRegion("grass"));
-		TextBox.setImage("spiral", Main.atlas.findRegion("spiral"));
-		TextBox.setImage("happy", Main.atlas.findRegion("happy"));
-		TextBox.setImage("lasers", Main.atlas.findRegion("lasers"));
-		TextBox.setImage("cat", Main.atlas.findRegion("cat"));
+		TextRenderer.setImage("test", Main.atlas.findRegion("shiptiny"));
+		TextRenderer.setImage("grass", Main.atlas.findRegion("grass"));
+		TextRenderer.setImage("spiral", Main.atlas.findRegion("spiral"));
+		TextRenderer.setImage("happy", Main.atlas.findRegion("happy"));
+		TextRenderer.setImage("lasers", Main.atlas.findRegion("lasers"));
+		TextRenderer.setImage("cat", Main.atlas.findRegion("cat"));
 		
-		tb = new TextBox("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmo " 
-				+ "Lorem [grass] ipsum dolor [grass][happy][lasers][grass] sit amet, [spiral] consectetur [happy][happy] adipiscing elit, "
-				+ "sed do eiusmod tempor incididunt ut [lasers]labore et dolore magna aliqua. Ut enim  ad minim veniam, quis nostrud exercitation"
-				+ " ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate "
-				+ "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt "
-				+ "in culpa qui officia deserunt [cat][cat]mollit anim id est laborum.", 200);
-		tb.makeResizable();
-		tb.setPosition(50, 50);
-		addActor(tb);
+		for(int i=1;i<3;i++){
+			String s="";
+			for(int j=0;j<i;j++)s+="a a B";
+			tb = new TextBox(s);
+			tb.setPosition(50, i*40);
+			addActor(tb);	
+		}
+		
 	}
 
 	@Override

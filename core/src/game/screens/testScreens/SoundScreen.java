@@ -9,6 +9,7 @@ import game.util.Screen;
 import game.util.Slider;
 import game.util.Sounds;
 import game.util.TextBox;
+import game.util.TextRenderer;
 
 public class SoundScreen extends Screen{
 	private static SoundScreen self;

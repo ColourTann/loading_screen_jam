@@ -11,6 +11,7 @@ import game.util.Screen;
 import game.util.Slider;
 import game.util.Sounds;
 import game.util.TextBox;
+import game.util.TextRenderer;
 
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Batch;
