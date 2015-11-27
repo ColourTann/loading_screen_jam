@@ -1,6 +1,5 @@
 package game.util;
 
-import game.Main;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -9,6 +8,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
+import game.Main;
 
 public class Draw {
 	
@@ -84,7 +85,9 @@ public class Draw {
 
 	public static void drawRotatedScaled(Batch batch, TextureRegion t, float x,
 			float y, float scaleX, float scaleY, float radianRotation) {
-		batch.draw(t, x, y, 0f, 0f, t.getRegionWidth(), t.getRegionHeight(),
+		batch.draw(t, (int)x, (int)y, 0f, 0f, 
+				(int)(t.getRegionWidth()), 
+				(int)(t.getRegionHeight()),
 				scaleX, scaleY, rad2deg(radianRotation));
 	}
 
@@ -171,6 +174,12 @@ public class Draw {
 	public static Pixmap getPixmap(Texture t){
 		t.getTextureData().prepare();
 		return t.getTextureData().consumePixmap();
+	}
+	
+	public static Pixmap getPixmap(TextureRegion t){
+		return getPixmap(t.getTexture());
+//		t.getTexture().getTextureData().prepare();
+//		return t.getTexture().getTextureData().consumePixmap();
 	}
 
 }

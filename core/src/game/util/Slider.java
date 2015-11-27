@@ -12,12 +12,12 @@ import com.badlogic.gdx.utils.Align;
 
 
 public class Slider extends Actor{
-	final static int defaultWidth=250, defaultHeight=30;
-	final static int gap=4;
+	final static int defaultWidth=80, defaultHeight=9;
+	final static int gap=1;
 	
 	//preset sliders//
-	public static Slider SFX=  new Slider("SFX", .5f, Colours.greyDark, Colours.grey);
-	public static Slider music=  new Slider("Music", .5f, Colours.greyDark, Colours.grey);
+	public static Slider SFX=  new Slider("SFX", .5f, Colours.dark, Colours.light);
+	public static Slider music=  new Slider("Music", .5f, Colours.dark, Colours.light);
 	static{
 		music.addSlideAction(new Runnable() {
 			
@@ -71,11 +71,13 @@ public class Slider extends Actor{
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
 		super.draw(batch, parentAlpha);
-		batch.setColor(backGround);
-		Draw.fillRectangle(batch, getX(), getY(), getWidth(), getHeight());
 		batch.setColor(foreGround);
+		Draw.fillRectangle(batch, getX(), getY(), getWidth(), getHeight());
+		batch.setColor(backGround);
+		Draw.drawRectangle(batch, getX(), getY(), getWidth(), getHeight(), gap);
 		Draw.fillRectangle(batch, getX()+gap, getY()+gap, (getWidth()-gap*2)*value, getHeight()-gap*2);
-		Fonts.font.draw(batch, title, getX(), getY()+getHeight()/2+Fonts.font.getCapHeight()/2, getWidth(), Align.center, false);		
+		batch.setColor(Colours.mixer);
+		TannFont.font.draw(batch, title, (int)(getX()+getWidth()/2), (int)(getY()+getHeight()/2-TannFont.font.getHeight()/2), Align.center);		
 	}
 	public float getValue(){
 		return value;

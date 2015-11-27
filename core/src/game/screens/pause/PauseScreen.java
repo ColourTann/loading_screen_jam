@@ -2,25 +2,20 @@ package game.screens.pause;
 
 import game.Main;
 import game.Main.TransitionType;
-import game.screens.testScreens.FontScreen;
 import game.screens.testScreens.GameScreen;
-import game.screens.testScreens.SoundScreen;
-import game.screens.testScreens.StartScreen;
+
 import game.util.Border;
+import game.util.Button;
+import game.util.Colours;
+import game.util.Draw;
 import game.util.Screen;
 import game.util.Slider;
-import game.util.Sounds;
-import game.util.TextBox;
-import game.util.TextRenderer;
-
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.utils.Align;
 
 public class PauseScreen extends Group{
-	private static int w=300,h=200;
+	private static int w=120,h=70;
 	private static PauseScreen self;
 	public static PauseScreen get(){
 		if(self==null)self=new PauseScreen();
@@ -30,51 +25,55 @@ public class PauseScreen extends Group{
 	private PauseScreen(){
 		setSize(w,h);
 		setPosition(Main.width/2-w/2, Main.height/2-h/2);
-		int width = (w-TextBox.gap*4)/3;
-		addTransitionButton("sound", SoundScreen.get(), (width+TextBox.gap)*0,0, width);
-		addTransitionButton("clicking", GameScreen.get(), (width+TextBox.gap)*1,0, width);
-		addTransitionButton("fonts", FontScreen.get(), (width+TextBox.gap)*2,0, width);
+		addTransitionButton("restart", GameScreen.get(), (int)(getWidth()/2), getY(.9f), 40);
 		
-		int numScales=5;
-		width= (w-TextBox.gap*(numScales+1))/numScales;
-		for(int i=0;i<numScales;i++) addScaleButton(i+1, (width+TextBox.gap)*i, 50, width);
 		
-		Slider.SFX.setPosition(w/2-Slider.SFX.getWidth()/2, 15);
+		
+		Slider.SFX.setPosition(w/2-Slider.SFX.getWidth()/2, getY(.3f));
 		addActor(Slider.SFX);
 		
-		Slider.music.setPosition(w/2-Slider.SFX.getWidth()/2, 60);
+		Slider.music.setPosition(w/2-Slider.SFX.getWidth()/2, getY(.55f));
 		addActor(Slider.music);
+		
+		int numScales=5;
+		int increment = w/(numScales+1);
+		for(int i=0;i<numScales;i++) addScaleButton(i+1, increment*(i+1), getY(.13f), increment-2);
 	}
 	
 	private void addScaleButton(final int scale, int x, int y, int width){
-		TextBox t = new TextBox("X "+scale, width);
-		t.makeMouseable();
-		t.addClickAction(new Runnable() {
+		Button t = new Button("X "+scale, width);
+		t.setClickAction(new Runnable() {
 			@Override
 			public void run() {
 				Main.self.setScale(scale);
 			}
 		});
-		t.setPosition(TextBox.gap+x, -TextBox.gap+(int)(getHeight()-t.getHeight()-y));
+		t.setPosition((int)(x-t.getWidth()/2), (int)(y-t.getHeight()/2));
 		addActor(t);
 	}
 	
 	private void addTransitionButton(String name, final Screen transitionTo, int x, int y, int width){
-		TextBox t = new TextBox(name, width);
-		t.makeMouseable();
-		t.addClickAction(new Runnable() {
+		Button t = new Button(name, width);
+		
+		t.setClickAction(new Runnable() {
 			@Override
 			public void run() {
 				Main.self.setScreen(transitionTo, TransitionType.LEFT, Interpolation.pow2Out, .3f);
 				Main.self.toggleMenu();
 			}
 		});
-		t.setPosition(TextBox.gap+x, -TextBox.gap+(int)(getHeight()-t.getHeight()-y));
+		t.setPosition((int)(x-t.getWidth()/2), (int)(y-t.getHeight()/2));
 		addActor(t);
 	}
 
+	private int getY(float ratio){
+		return (int) (getHeight()*ratio);
+	}
+	
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
+		batch.setColor(Colours.light);
+		Draw.fillRectangle(batch, getX(), getY(), getWidth(), getHeight());
 		Border.draw(batch, getX(), getY(), getWidth(), getHeight(), false);
 		super.draw(batch, parentAlpha);
 	}

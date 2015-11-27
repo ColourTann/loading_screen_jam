@@ -1,13 +1,13 @@
 package game;
 
+import game.screens.minigames.snake.Snake;
 import game.screens.pause.InputBlocker;
 import game.screens.pause.PauseScreen;
-import game.screens.testScreens.StartScreen;
 import game.util.Colours;
 import game.util.Draw;
-import game.util.Fonts;
 import game.util.Screen;
 import game.util.Sounds;
+import game.util.TannFont;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -28,13 +28,13 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 
 public class Main extends ApplicationAdapter {
-	public static int width=600,height=420;
+	public static int width=200,height=100;
 	SpriteBatch batch;
 	Stage stage;
 	OrthographicCamera cam;
 	public static TextureAtlas atlas;
 	public static Main self;
-	public static int scale=1;
+	public static int scale=5;
 	public static boolean debug = true;
 	Screen currentScreen;
 	Screen previousScreen;
@@ -49,7 +49,6 @@ public class Main extends ApplicationAdapter {
 		self=this;
 		
 		Sounds.setup();
-		Fonts.setup();
 		
 		
 		
@@ -75,7 +74,7 @@ public class Main extends ApplicationAdapter {
 		});
 
 		setScale(scale);
-		setScreen(new StartScreen());	
+		setScreen(Snake.get());	
 	
 	}
 	
@@ -158,8 +157,8 @@ public class Main extends ApplicationAdapter {
 	}
 	
 	public void drawFPS(Batch batch){
-		Fonts.font.setColor(Colours.light);
-		Fonts.font.draw(batch, "FPS: "+Gdx.graphics.getFramesPerSecond(), 0, Main.height);
+		batch.setColor(Colours.light);
+		TannFont.font.draw(batch, "FPS: "+Gdx.graphics.getFramesPerSecond(), 0, Main.height);
 	}
 	
 	

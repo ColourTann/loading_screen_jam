@@ -6,7 +6,6 @@ import com.badlogic.gdx.utils.Pools;
 import game.Main;
 import game.util.Colours;
 import game.util.Draw;
-import game.util.Fonts;
 import game.util.Screen;
 
 public class GameScreen extends Screen{
@@ -24,7 +23,7 @@ public class GameScreen extends Screen{
 	
 	@Override
 	public void preDraw(Batch batch) {
-		batch.setColor(Colours.brown);
+		batch.setColor(Colours.light);
 		Draw.fillRectangle(batch, getX(), getY(), getWidth(), getHeight());
 	}
 	
