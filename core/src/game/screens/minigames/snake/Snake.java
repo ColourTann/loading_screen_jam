@@ -15,7 +15,7 @@ public class Snake extends Screen{
 		return self;
 	}
 	private Snake() {
-		addActor(new LoadingBar());
+		addActor(new LoadingBar(5));
 	}
 	
 	@Override

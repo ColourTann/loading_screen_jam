@@ -24,14 +24,16 @@ public class LoadingBar extends Group{
 	private float secondCounter;
 	float progress = 0;
 	private String currentString;
-	public LoadingBar() {
+	float speed;
+	public LoadingBar(float speed) {
+		this.speed=speed;
 		setSize(Main.width, loadingBarHeight);
 		setPosition(0, Main.height-getHeight());
 		randomiseString();
 	}
 	
 	private void progress() {
-		progress += Math.random()*(getFactor())/20f;
+		progress += Math.random()*(getFactor())/20f*speed;
 		if(progress>=1){
 			progress=1;
 			currentString="finished loading";
