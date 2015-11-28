@@ -1,6 +1,8 @@
 package game;
 
+import game.screens.InitialLoadingScreen;
 import game.screens.minigames.snake.Snake;
+import game.screens.minigames.turtle.TurtleGame;
 import game.screens.pause.InputBlocker;
 import game.screens.pause.PauseScreen;
 import game.util.Colours;
@@ -11,6 +13,7 @@ import game.util.TannFont;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap.Format;
@@ -43,15 +46,15 @@ public class Main extends ApplicationAdapter {
 	public enum MainState{Normal, Paused}
 	@Override
 	public void create () {
-		
-		
-		
+
+
+
 		self=this;
-		
+
 		Sounds.setup();
-		
-		
-		
+
+
+
 		buffer = new FrameBuffer(Format.RGBA8888, Main.width, Main.height, false);
 		atlas= new TextureAtlas(Gdx.files.internal("atlas_image.atlas"));
 		stage = new Stage(new FitViewport(Main.width, Main.height));
@@ -60,24 +63,26 @@ public class Main extends ApplicationAdapter {
 		Gdx.input.setInputProcessor(stage);
 		stage.addListener(new InputListener(){
 			public boolean keyDown (InputEvent event, int keycode) {
-				
+
 				switch(keycode){
 				case Keys.ESCAPE:
 					toggleMenu();
 					return false;
 				}
-				
+				currentScreen.keyPress(keycode);
 				return true;
 			}
 
-			
+
 		});
 
 		setScale(scale);
-		setScreen(Snake.get());	
-	
+//		setScreen(InitialLoadingScreen.get());
+//		setScreen(Snake.get());	
+		setScreen(TurtleGame.get());
+
 	}
-	
+
 	public void setScale(int scale){
 		Main.scale=scale;
 		int newWidth = width*scale;
@@ -85,7 +90,7 @@ public class Main extends ApplicationAdapter {
 		Gdx.graphics.setDisplayMode(newWidth, newHeight, false);
 		stage.getViewport().update(newWidth, newHeight);
 	}
-	
+
 	public void toggleMenu() {
 		if(state!=MainState.Paused){
 			stage.addActor(InputBlocker.get());
@@ -99,9 +104,9 @@ public class Main extends ApplicationAdapter {
 		}
 
 	}
-	
-	
-	
+
+
+
 	private MainState state=MainState.Normal;
 	public MainState getState(){
 		return state;
@@ -109,21 +114,26 @@ public class Main extends ApplicationAdapter {
 	public void setState(MainState state){
 		this.state=state;
 	}
-	public enum TransitionType{LEFT};
+	public enum TransitionType{LEFT, RIGHT};
 	public void setScreen(Screen screen, TransitionType type, Interpolation interp, float speed){
 		if(screen==currentScreen)return;
 		setScreen(screen);
 		switch(type){
 		case LEFT:
 			screen.setPosition(Main.width, 0);
-//			Action a = ;
 			screen.addAction(Actions.moveTo(0, 0, speed, interp));
 			previousScreen.addAction(Actions.moveTo(-Main.width, 0, speed, interp));
 			break;
+		case RIGHT:
+			screen.setPosition(-Main.width, 0);
+			screen.addAction(Actions.moveTo(0, 0, speed, interp));
+			previousScreen.addAction(Actions.moveTo(Main.width, 0, speed, interp));
+			break;
+		
 		}
 		previousScreen.addAction(Actions.after(Actions.removeActor()));
 	}
-	
+
 	public void setScreen(Screen screen){
 		previousScreen=currentScreen;
 		currentScreen=screen;
@@ -134,7 +144,7 @@ public class Main extends ApplicationAdapter {
 	public void render () {
 
 		update(Gdx.graphics.getDeltaTime());
-		
+
 		buffer.bind();
 		buffer.begin();
 		batch.begin();
@@ -155,14 +165,17 @@ public class Main extends ApplicationAdapter {
 		Draw.drawRotatedScaledFlipped(batch, buffer.getColorBufferTexture(), 0, 0, 1, 1, 0, false, true);
 		batch.end();
 	}
-	
+
 	public void drawFPS(Batch batch){
 		batch.setColor(Colours.light);
 		TannFont.font.draw(batch, "FPS: "+Gdx.graphics.getFramesPerSecond(), 0, Main.height);
 	}
-	
-	
+
+
 	public void update(float delta){
+		if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)){
+			delta/=10f;
+		}
 		ticks+=delta;
 		Sounds.tickFaders(delta);
 		stage.act(delta);

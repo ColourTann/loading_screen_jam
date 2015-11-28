@@ -13,14 +13,14 @@ cat
   index: -1
 corner
   rotate: false
-  xy: 2, 5
+  xy: 36, 17
   size: 4, 4
   orig: 4, 4
   offset: 0, 0
   index: -1
 edge
   rotate: false
-  xy: 36, 17
+  xy: 36, 11
   size: 1, 4
   orig: 1, 4
   offset: 0, 0
@@ -55,7 +55,7 @@ lasers
   index: -1
 pixel
   rotate: false
-  xy: 2, 2
+  xy: 42, 20
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
@@ -72,5 +72,47 @@ spiral
   xy: 187, 42
   size: 20, 20
   orig: 20, 20
+  offset: 0, 0
+  index: -1
+turtle/duck
+  rotate: false
+  xy: 2, 2
+  size: 18, 7
+  orig: 18, 7
+  offset: 0, 0
+  index: -1
+turtle/jump
+  rotate: false
+  xy: 22, 2
+  size: 18, 7
+  orig: 18, 7
+  offset: 0, 0
+  index: -1
+turtle/mound
+  rotate: false
+  xy: 165, 12
+  size: 10, 6
+  orig: 10, 6
+  offset: 0, 0
+  index: -1
+turtle/spike
+  rotate: false
+  xy: 209, 48
+  size: 7, 14
+  orig: 7, 14
+  offset: 0, 0
+  index: -1
+turtle/walk0
+  rotate: false
+  xy: 58, 36
+  size: 18, 7
+  orig: 18, 7
+  offset: 0, 0
+  index: -1
+turtle/walk1
+  rotate: false
+  xy: 187, 33
+  size: 18, 7
+  orig: 18, 7
   offset: 0, 0
   index: -1

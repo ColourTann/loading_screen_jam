@@ -39,6 +39,10 @@ public class GameScreen extends Screen{
 	public void postTick(float delta) {
 	}
 
+	@Override
+	public void keyPress(int keycode) {
+	}
+
 	
 
 

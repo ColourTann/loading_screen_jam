@@ -19,7 +19,7 @@ public class TannFont {
 	public TannFont(TextureRegion font) {
 		Pixmap p = Draw.getPixmap(font);
 		//all the characters split by rows
-		String[] chars =  new String[]{"0123456789.,!?:()\"+-/_%='","ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz"};
+		String[] chars =  new String[]{"0123456789.,!?:()\"+-/_%='<>","ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz"};
 		int x=0;
 		int y=0;
 		for(int row=0;row<3;row++){
@@ -62,6 +62,9 @@ public class TannFont {
 	
 	public void draw(Batch batch, String text, int x, int y, int align) {
 		if(align==Align.center){
+			draw(batch, text, x-getWidth(text)/2, y-getHeight()/2);
+		}
+		if(align==Align.bottom){
 			draw(batch, text, x-getWidth(text)/2, y);
 		}
 		

@@ -41,7 +41,7 @@ public class Button extends Actor{
 		Draw.fillRectangle(batch, getX(), getY(), getWidth(), getHeight());
 		batch.setColor(Colours.dark);
 		Draw.drawRectangle(batch, getX(), getY(), getWidth(), getHeight(), 1);
-		TannFont.font.draw(batch, text, (int)(getX()+getWidth()/2), (int)getY()+gap, Align.center);
+		TannFont.font.draw(batch, text, (int)(getX()+getWidth()/2), (int)getY()+gap, Align.bottom);
 	}
 
 }

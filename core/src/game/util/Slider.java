@@ -2,12 +2,16 @@ package game.util;
 
 import game.Main;
 
+import org.w3c.dom.css.Rect;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
 import com.badlogic.gdx.utils.Align;
 
 
@@ -67,7 +71,8 @@ public class Slider extends Actor{
 	public void addSlideAction(Runnable r){
 		this.slideAction=r;
 	}
-	
+	Rectangle clip = new Rectangle(getX(), getY(), getWidth()*value, getHeight());
+	Rectangle scissors = new Rectangle();
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
 		super.draw(batch, parentAlpha);
@@ -76,8 +81,19 @@ public class Slider extends Actor{
 		batch.setColor(backGround);
 		Draw.drawRectangle(batch, getX(), getY(), getWidth(), getHeight(), gap);
 		Draw.fillRectangle(batch, getX()+gap, getY()+gap, (getWidth()-gap*2)*value, getHeight()-gap*2);
-		batch.setColor(Colours.mixer);
-		TannFont.font.draw(batch, title, (int)(getX()+getWidth()/2), (int)(getY()+getHeight()/2-TannFont.font.getHeight()/2), Align.center);		
+		TannFont.font.draw(batch, title, (int)(getX()+getWidth()/2), (int)(getY()+getHeight()/2), Align.center);
+		batch.flush();
+		clip.x=getParent().getX()+getX();
+		clip.y=getParent().getY()+getY();
+		clip.width=getWidth()*value;
+		clip.height=getHeight();;
+		boolean added =(ScissorStack.pushScissors(clip));
+		if(added){
+			batch.setColor(foreGround);
+			TannFont.font.draw(batch, title, (int)(getX()+getWidth()/2), (int)(getY()+getHeight()/2), Align.center);
+			batch.flush();
+			ScissorStack.popScissors();
+		}
 	}
 	public float getValue(){
 		return value;

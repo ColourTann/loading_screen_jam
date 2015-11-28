@@ -2,6 +2,7 @@ package game.screens.pause;
 
 import game.Main;
 import game.Main.TransitionType;
+import game.screens.minigames.snake.Snake;
 import game.screens.testScreens.GameScreen;
 
 import game.util.Border;
@@ -25,7 +26,7 @@ public class PauseScreen extends Group{
 	private PauseScreen(){
 		setSize(w,h);
 		setPosition(Main.width/2-w/2, Main.height/2-h/2);
-		addTransitionButton("restart", GameScreen.get(), (int)(getWidth()/2), getY(.9f), 40);
+		addTransitionButton("restart", Snake.get(), (int)(getWidth()/2), getY(.9f), 40);
 		
 		
 		
