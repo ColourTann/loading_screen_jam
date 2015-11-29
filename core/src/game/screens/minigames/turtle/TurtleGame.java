@@ -1,18 +1,23 @@
 package game.screens.minigames.turtle;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.utils.Array;
 
 import game.Main;
-import game.screens.minigames.snake.Grid;
+import game.Main.TransitionType;
+import game.screens.minigames.Minigame;
 import game.screens.minigames.snake.Snake;
 import game.screens.minigames.turtle.Obstacle.ObstacleType;
+import game.screens.unlock.ColourUnlock;
+import game.screens.unlock.KeyUnlock;
+import game.screens.unlock.Unlock;
 import game.util.Colours;
 import game.util.Draw;
 import game.util.Screen;
 import game.util.TannFont;
 
-public class TurtleGame extends Screen{
+public class TurtleGame extends Minigame{
 	int score =0;
 	int highscore =0;
 	Array<Obstacle> obstacles = new Array<Obstacle>();
@@ -25,26 +30,35 @@ public class TurtleGame extends Screen{
 	Turtle turtle;
 	float obstacleTicks=0;
 	private TurtleGame(){
+		super("snake", .4f);
+		
+	}
+	
+	@Override
+	public void setup() {
 		turtle = new Turtle();
 		addActor(turtle);
 		turtle.setPosition(5, Main.height/2);
 	}
+	
 	@Override
 	public void preDraw(Batch batch) {
 		batch.setColor(Colours.light);
 		Draw.fillRectangle(batch, getX(), getY(), getWidth(), Main.height/2);
 		Draw.fillRectangle(batch, getX(), Main.height/2+ObstacleType.Spike.region.getRegionHeight()+5, getWidth(), Main.height/2);
-	}
-
-	@Override
-	public void postDraw(Batch batch) {
 		batch.setColor(Colours.dark);
 		TannFont.font.draw(batch, "Score: "+score, 50, (int)(Main.height*.3f));
 		TannFont.font.draw(batch, "Highscore: "+highscore, 100, (int)(Main.height*.3f));
 	}
 
 	@Override
+	public void postDraw(Batch batch) {
+	
+	}
+
+	@Override
 	public void preTick(float delta) {
+		if(!started) return;
 		obstacleTicks+=delta;
 		
 		if(obstacleTicks>Math.max(.83, 1.5f-score*.025f)){
@@ -74,7 +88,24 @@ public class TurtleGame extends Screen{
 
 	@Override
 	public void keyPress(int keycode) {
+		super.keyPress(keycode);
 		turtle.keyPress(keycode);
 	}
+	@Override
+	public String getName() {
+		return "turtle";
+	}
+	@Override
+	public Unlock[] getUnlocks() {
+		return new Unlock[]{
+				new KeyUnlock('{'), new KeyUnlock('}'), new ColourUnlock("light", Colours.light), new ColourUnlock("dark", Colours.dark)
+		};
+	}
+
+	@Override
+	protected void nextGame() {
+		Main.self.setScreen(Snake.get(), TransitionType.LEFT, Interpolation.pow2Out, .5f);
+	}
+	
 
 }

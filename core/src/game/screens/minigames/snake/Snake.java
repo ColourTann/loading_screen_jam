@@ -21,8 +21,11 @@ public class Snake extends Minigame{
 		return self;
 	}
 	private Snake() {
-		super("fighter");
-		addLoadingBar(new LoadingBar("fighter", .4f, false));
+		super("fighter", .4f);
+	}
+	
+	@Override
+	public void setup() {
 		g = new Grid();
 		addActor(g);
 	}
@@ -50,12 +53,17 @@ public class Snake extends Minigame{
 	}
 	@Override
 	public Unlock[] getUnlocks() {
-		
-		return new Unlock[]{};
+		return new Unlock[]{new KeyUnlock('<'), new KeyUnlock('>')};
 	}
 	@Override
 	public void keyPress(int keycode) {
+		super.keyPress(keycode);
 		g.s.keyPress(keycode);
+	}
+
+	@Override
+	protected void nextGame() {
+		
 	}
 
 }

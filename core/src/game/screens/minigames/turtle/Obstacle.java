@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import game.Main;
+import game.util.Colours;
 import game.util.Draw;
 
 public class Obstacle extends Actor{
@@ -38,6 +39,7 @@ public class Obstacle extends Actor{
 	
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
+		batch.setColor(Colours.white);
 		Draw.draw(batch, type.region, getX()-type.region.getRegionWidth()/2, getY());
 		super.draw(batch, parentAlpha);
 	}

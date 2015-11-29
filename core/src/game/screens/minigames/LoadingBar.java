@@ -29,11 +29,10 @@ public class LoadingBar extends Group{
 	public float progress = 0;
 	private String currentString;
 	float speed;
-	String name;
-	public LoadingBar(String name, float speed, boolean fullScreen) {
-		this.name=name;
+	String name="unset";
+	public LoadingBar(float speed) {
 		this.speed=speed;
-		setSize(Main.width, fullScreen?Main.height:loadingBarHeight);
+		setSize(Main.width, loadingBarHeight);
 		setPosition(0, Main.height-getHeight());
 		randomiseString();
 	}
@@ -80,6 +79,9 @@ public class LoadingBar extends Group{
 		Draw.fillRectangle(batch, getX(), getY(), getWidth(), getHeight());
 		batch.setColor(Colours.light);
 		String toDraw="Loading "+name+": "+(int)(progress*100)+"% "+currentString;
+		if(progress==1){
+			toDraw=name+" loaded, press space to play";
+		}
 		TannFont.font.draw(batch, toDraw, (int)(getX()+2), (int)(getY()+getHeight()/2-TannFont.font.getHeight()/2));
 		Draw.fillRectangle(batch, getX(), getY(), getWidth()*progress, getHeight());
 		batch.setColor(Colours.dark);

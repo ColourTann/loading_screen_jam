@@ -26,8 +26,7 @@ public class InitialLoadingScreen extends Minigame{
 	}
 	
 	private InitialLoadingScreen() {
-		super("snake");
-		addLoadingBar(new LoadingBar("snake", 10, false));
+		super("turtle", 10);
 	}
 	
 	@Override
@@ -53,21 +52,15 @@ public class InitialLoadingScreen extends Minigame{
 
 	@Override
 	public Unlock[] getUnlocks() {
-		return new Unlock[]{
-				new KeyUnlock('<'), new KeyUnlock('>'), new ColourUnlock("light", Colours.light), new ColourUnlock("dark", Colours.dark)
-		};
+		return new Unlock[0];
 	}
 
 	@Override
-	public void keyPress(int keycode) {
-		switch (keycode) {
-		case Input.Keys.LEFT:
-		case Input.Keys.RIGHT:
-			Main.self.setScreen(TurtleGame.get(), TransitionType.LEFT, Interpolation.pow2Out, .5f);
-			break;
+	public void setup() {
+	}
 
-		default:
-			break;
-		}
+	@Override
+	protected void nextGame() {
+		Main.self.setScreen(TurtleGame.get(), TransitionType.LEFT, Interpolation.pow2Out, .5f);
 	}	
 }

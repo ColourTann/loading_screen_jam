@@ -6,9 +6,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class Snakey extends Actor{
 
-	int direction;
-	boolean turned;
+
 	Tile t;
+	int dx, dy;
 	public Snakey(Tile start) {
 		enterTile(start);
 	}
@@ -24,30 +24,30 @@ public class Snakey extends Actor{
 	}
 
 	public void turn() {
-		turned=false;
-		int dx=0, dy=0;
-		switch(direction){
-		case 0: dx=1; break;
-		case 1: dy=1; break;
-		case 2: dx=-1; break;
-		case 3: dy=-1; break;
-		}
 		enterTile(t.getTile(dx, dy));
 	}
 
 	public void keyPress(int keycode){
-		if(turned) return;
-		turned=true;
+	
 		switch(keycode){
 		case Input.Keys.LEFT:
-			direction++;
+			if(dx!=0) return;
+			dy=0; dx=-1;
 			break;
 		case Input.Keys.RIGHT:
-			direction--;
+			if(dx!=0) return;
+			dy=0; dx=1;
+			break;
+		case Input.Keys.UP:
+			if(dy!=0) return;
+			dy=1; dx=0;
+			break;
+		case Input.Keys.DOWN:
+			if(dy!=0) return;
+			dy=-1; dx=0;
 			break;
 		}
-		direction+=4;
-		direction%=4;
+		
 	}
 
 	private void enterTile(Tile t){

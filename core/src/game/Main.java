@@ -77,9 +77,9 @@ public class Main extends ApplicationAdapter {
 		});
 
 		setScale(scale);
-//		setScreen(InitialLoadingScreen.get());
+		setScreen(InitialLoadingScreen.get());
 //		setScreen(Snake.get());	
-		setScreen(TurtleGame.get());
+//		setScreen(TurtleGame.get());
 
 	}
 
