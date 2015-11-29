@@ -1,7 +1,7 @@
 package game;
 
 import game.screens.InitialLoadingScreen;
-import game.screens.minigames.snake.Snake;
+import game.screens.minigames.snake.SnakeGame;
 import game.screens.minigames.turtle.TurtleGame;
 import game.screens.pause.InputBlocker;
 import game.screens.pause.PauseScreen;
@@ -77,8 +77,8 @@ public class Main extends ApplicationAdapter {
 		});
 
 		setScale(scale);
-		setScreen(InitialLoadingScreen.get());
-//		setScreen(Snake.get());	
+//		setScreen(InitialLoadingScreen.get());
+		setScreen(SnakeGame.get());	
 //		setScreen(TurtleGame.get());
 
 	}

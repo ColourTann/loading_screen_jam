@@ -10,6 +10,7 @@ public class Tile extends Actor{
 	public static int tileSize=5;
 	int gridX, gridY;
 	int snake;
+	boolean pellet;
 	public Tile(int gridX, int gridY) {
 		this.gridX=gridX; this.gridY=gridY;
 		setPosition(gridX*tileSize, gridY*tileSize);
@@ -22,6 +23,10 @@ public class Tile extends Actor{
 	
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
+		if(pellet){
+			batch.setColor(Colours.mixer);
+			Draw.fillRectangle(batch, getX(), getY(), getWidth(), getHeight());
+		}
 		if(snake>0){
 			batch.setColor(Colours.light);
 			Draw.fillRectangle(batch, getX(), getY(), getWidth(), getHeight());
@@ -30,11 +35,22 @@ public class Tile extends Actor{
 	}
 	
 	public Tile getTile(int dx, int dy){
-		return Snake.get().g.getTile(gridX+dx, gridY+dy);
+		return SnakeGame.get().g.getTile(gridX+dx, gridY+dy);
 	}
 
-	public void snakeIt(int duration) {
-		this.snake=duration;
+	public boolean addPellet(){
+		if(snake>0)return false;
+		pellet=true;
+		return true;
 	}
 	
+	public boolean enterWithSnake(int duration) {
+		this.snake=duration;
+		if(pellet){
+			pellet=false;
+			SnakeGame.get().g.addPellet();
+			return true;
+		}
+		return false;
+	}
 }

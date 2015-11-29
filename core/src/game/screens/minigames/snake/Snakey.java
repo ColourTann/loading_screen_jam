@@ -9,6 +9,9 @@ public class Snakey extends Actor{
 
 	Tile t;
 	int dx, dy;
+	int size=5;
+	int nextKeycode=-1;
+	boolean turned;
 	public Snakey(Tile start) {
 		enterTile(start);
 	}
@@ -25,10 +28,19 @@ public class Snakey extends Actor{
 
 	public void turn() {
 		enterTile(t.getTile(dx, dy));
+		turned=false;
+		if(nextKeycode!=-1){
+			keyPress(nextKeycode);
+			nextKeycode=-1;
+		}
 	}
 
 	public void keyPress(int keycode){
-	
+		if(turned){
+			nextKeycode=keycode;
+			return;
+		}
+		turned=true;
 		switch(keycode){
 		case Input.Keys.LEFT:
 			if(dx!=0) return;
@@ -52,7 +64,8 @@ public class Snakey extends Actor{
 
 	private void enterTile(Tile t){
 		this.t=t;
-		t.snakeIt(5);
+		boolean b = t.enterWithSnake(size);
+		if(b)size++;
 	}
 
 }

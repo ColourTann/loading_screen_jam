@@ -8,7 +8,7 @@ import game.Main;
 import game.Main.TransitionType;
 import game.screens.minigames.LoadingBar;
 import game.screens.minigames.Minigame;
-import game.screens.minigames.snake.Snake;
+import game.screens.minigames.snake.SnakeGame;
 import game.screens.minigames.turtle.Turtle;
 import game.screens.minigames.turtle.TurtleGame;
 import game.screens.unlock.ColourUnlock;

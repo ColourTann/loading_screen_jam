@@ -13,14 +13,14 @@ import game.util.Colours;
 import game.util.Draw;
 import game.util.Screen;
 
-public class Snake extends Minigame{
-	private static Snake self;
+public class SnakeGame extends Minigame{
+	private static SnakeGame self;
 	public Grid g;
-	public static Snake get(){
-		if(self==null) self= new Snake();
+	public static SnakeGame get(){
+		if(self==null) self= new SnakeGame();
 		return self;
 	}
-	private Snake() {
+	private SnakeGame() {
 		super("fighter", .4f);
 	}
 	
@@ -53,7 +53,7 @@ public class Snake extends Minigame{
 	}
 	@Override
 	public Unlock[] getUnlocks() {
-		return new Unlock[]{new KeyUnlock('<'), new KeyUnlock('>')};
+		return new Unlock[]{new KeyUnlock('<'), new KeyUnlock('>'), new ColourUnlock("blue", Colours.mixer)};
 	}
 	@Override
 	public void keyPress(int keycode) {

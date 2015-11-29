@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.Array;
 import game.Main;
 import game.Main.TransitionType;
 import game.screens.minigames.Minigame;
-import game.screens.minigames.snake.Snake;
+import game.screens.minigames.snake.SnakeGame;
 import game.screens.minigames.turtle.Obstacle.ObstacleType;
 import game.screens.unlock.ColourUnlock;
 import game.screens.unlock.KeyUnlock;
@@ -104,7 +104,7 @@ public class TurtleGame extends Minigame{
 
 	@Override
 	protected void nextGame() {
-		Main.self.setScreen(Snake.get(), TransitionType.LEFT, Interpolation.pow2Out, .5f);
+		Main.self.setScreen(SnakeGame.get(), TransitionType.LEFT, Interpolation.pow2Out, .5f);
 	}
 	
 

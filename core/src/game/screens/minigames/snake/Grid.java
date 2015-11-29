@@ -11,7 +11,7 @@ public class Grid extends Group{
 	int tilesAcross=Main.width/Tile.tileSize;
 	int tilesDown=(Main.height-LoadingBar.loadingBarHeight)/Tile.tileSize;
 	Tile[][] tiles = new Tile[tilesAcross][tilesDown];
-	static final float secondsPerMove=.3f;
+	static final float secondsPerMove=.15f;
 	float move = 0;
 	Snakey s;
 	public Grid() {
@@ -25,6 +25,18 @@ public class Grid extends Group{
 		}
 		s = new Snakey(tiles[4][tilesDown/2]);
 		addActor(s);
+		
+	}
+	
+	public void addPellet(){
+		boolean found = false;
+		while(!found){
+			found = getRandomTile().addPellet();
+		}
+	}
+	
+	public Tile getRandomTile(){
+		return tiles[(int)(Math.random()*tilesAcross)][(int)(Math.random()*tilesDown)];
 	}
 	
 	@Override
