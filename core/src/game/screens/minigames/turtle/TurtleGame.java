@@ -1,5 +1,6 @@
 package game.screens.minigames.turtle;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.utils.Array;
@@ -18,8 +19,7 @@ import game.util.Screen;
 import game.util.TannFont;
 
 public class TurtleGame extends Minigame{
-	int score =0;
-	int highscore =0;
+	
 	Array<Obstacle> obstacles = new Array<Obstacle>();
 	private static TurtleGame self;
 	public static TurtleGame get(){
@@ -31,7 +31,9 @@ public class TurtleGame extends Minigame{
 	float obstacleTicks=0;
 	private TurtleGame(){
 		super("snake", .4f);
-		
+		Minigame.activeKeys.add(Input.Keys.UP);
+		Minigame.activeKeys.add(Input.Keys.DOWN);
+		Main.coloursUnlocked=2;
 	}
 	
 	@Override
@@ -69,18 +71,7 @@ public class TurtleGame extends Minigame{
 		}
 	}
 	
-	public void incrementScore(){
-		score++;
-		highscore=Math.max(score, highscore);
-	}
 	
-	public void resetScore(){
-		score=0;
-		for(Obstacle o: obstacles){
-			o.remove();
-		}
-		obstacles.clear();
-	}
 
 	@Override
 	public void postTick(float delta) {
@@ -89,7 +80,7 @@ public class TurtleGame extends Minigame{
 	@Override
 	public void keyPress(int keycode) {
 		super.keyPress(keycode);
-		turtle.keyPress(keycode);
+		if(started) turtle.keyPress(keycode);
 	}
 	@Override
 	public String getName() {
@@ -105,6 +96,14 @@ public class TurtleGame extends Minigame{
 	@Override
 	protected void nextGame() {
 		Main.self.setScreen(SnakeGame.get(), TransitionType.LEFT, Interpolation.pow2Out, .5f);
+	}
+
+	@Override
+	public void resetGame() {
+		for(Obstacle o: obstacles){
+			o.remove();
+		}
+		obstacles.clear();
 	}
 	
 

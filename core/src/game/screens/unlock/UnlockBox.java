@@ -1,5 +1,6 @@
 package game.screens.unlock;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Align;
@@ -22,17 +23,33 @@ public class UnlockBox extends Group{
 			u.setPosition(border+gap+(i%2)*(u.getWidth()+gap)+(unlocks.length%2)*(i==unlocks.length-1?1:0)*(gap/2+u.getWidth()/2), bottom+border+gap+(i/2)*(u.getHeight()+gap));
 		}
 	}
-	
+
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
-		batch.setColor(Colours.light);
+		Color borderCol=null;
+		Color backgroundCol=null;
+		Color textCol=null;
+		switch(Main.coloursUnlocked){
+		case 2:
+			borderCol=Colours.light;
+			backgroundCol=Colours.dark;
+			textCol=Colours.light;
+			break;
+		case 3:
+			borderCol=Colours.mixer;
+			backgroundCol=Colours.dark;
+			textCol=Colours.light;
+			break;
+
+		}
+		batch.setColor(borderCol);
 		Draw.fillRectangle(batch, getX(), getY(), getWidth(), getHeight());
-		batch.setColor(Colours.dark);
+		batch.setColor(backgroundCol);
 		Draw.fillRectangle(batch, getX()+border, getY()+border, getWidth()-border*2, getHeight()-border*2);
-		batch.setColor(Colours.light);
+		batch.setColor(textCol);
 		TannFont.font.draw(batch, "loaded game: "+name, (int)(getX()+getWidth()/2), (int)(getY()+getHeight()-top/1.2), Align.center);
 		TannFont.font.draw(batch, "loaded new features:", (int)(getX()+getWidth()/2), (int)(getY()+getHeight()-top-extraText/1.2), Align.center);
-		TannFont.font.draw(batch, "press a key to continue", (int)(getX()+getWidth()/2), (int)(getY()+bottom/1.2), Align.center);
+		TannFont.font.draw(batch, "press space to continue", (int)(getX()+getWidth()/2), (int)(getY()+bottom/1.2), Align.center);
 		super.draw(batch, parentAlpha);
 	}
 }

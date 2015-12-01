@@ -1,6 +1,7 @@
 package game.screens.minigames;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -75,16 +76,35 @@ public class LoadingBar extends Group{
 	Rectangle clip =new Rectangle(getX(), getY(), getWidth()*progress, Gdx.graphics.getHeight());
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
-		batch.setColor(Colours.dark);
+		Color bg=null;
+		Color bar=null;
+		Color textUncovered=null;
+		Color textCovered=null;
+		switch(Main.coloursUnlocked){
+		case 2:
+			bg=Colours.dark;
+			bar=Colours.light;
+			textUncovered=Colours.light;
+			textCovered=Colours.dark;
+			break;
+		case 3:
+			bg=Colours.mixer;
+			bar=Colours.light;
+			textUncovered=Colours.dark;
+			textCovered=Colours.dark;
+			break;
+		}
+		batch.setColor(bg);
 		Draw.fillRectangle(batch, getX(), getY(), getWidth(), getHeight());
-		batch.setColor(Colours.light);
+		batch.setColor(textUncovered);
 		String toDraw="Loading "+name+": "+(int)(progress*100)+"% "+currentString;
 		if(progress==1){
 			toDraw=name+" loaded, press space to play";
 		}
 		TannFont.font.draw(batch, toDraw, (int)(getX()+2), (int)(getY()+getHeight()/2-TannFont.font.getHeight()/2));
+		batch.setColor(bar);
 		Draw.fillRectangle(batch, getX(), getY(), getWidth()*progress, getHeight());
-		batch.setColor(Colours.dark);
+		batch.setColor(textCovered);
 		batch.flush();
 		
 		clip.width=getWidth()*progress;

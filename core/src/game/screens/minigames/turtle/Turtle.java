@@ -98,7 +98,7 @@ public class Turtle extends Actor{
 		t.setColor(Colours.dark);
 		t.disableAlpha();
 		TurtleGame.get().addParticle(t);
-		TurtleGame.get().resetScore();
+		TurtleGame.get().reset();
 	}
 	
 	@Override

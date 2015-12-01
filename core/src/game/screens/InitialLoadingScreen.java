@@ -62,5 +62,9 @@ public class InitialLoadingScreen extends Minigame{
 	@Override
 	protected void nextGame() {
 		Main.self.setScreen(TurtleGame.get(), TransitionType.LEFT, Interpolation.pow2Out, .5f);
+	}
+
+	@Override
+	public void resetGame() {
 	}	
 }

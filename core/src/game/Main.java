@@ -2,7 +2,6 @@ package game;
 
 import game.screens.InitialLoadingScreen;
 import game.screens.minigames.snake.SnakeGame;
-import game.screens.minigames.turtle.TurtleGame;
 import game.screens.pause.InputBlocker;
 import game.screens.pause.PauseScreen;
 import game.util.Colours;
@@ -31,7 +30,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 
 public class Main extends ApplicationAdapter {
-	public static int width=200,height=100;
+	public static int width=180,height=100;
 	SpriteBatch batch;
 	Stage stage;
 	OrthographicCamera cam;
@@ -43,18 +42,12 @@ public class Main extends ApplicationAdapter {
 	Screen previousScreen;
 	FrameBuffer buffer;
 	public static float ticks;
+	public static int coloursUnlocked=2;
 	public enum MainState{Normal, Paused}
 	@Override
 	public void create () {
-
-
-
 		self=this;
-
 		Sounds.setup();
-
-
-
 		buffer = new FrameBuffer(Format.RGBA8888, Main.width, Main.height, false);
 		atlas= new TextureAtlas(Gdx.files.internal("atlas_image.atlas"));
 		stage = new Stage(new FitViewport(Main.width, Main.height));
@@ -77,8 +70,8 @@ public class Main extends ApplicationAdapter {
 		});
 
 		setScale(scale);
-//		setScreen(InitialLoadingScreen.get());
-		setScreen(SnakeGame.get());	
+		setScreen(InitialLoadingScreen.get());
+//		setScreen(SnakeGame.get());	
 //		setScreen(TurtleGame.get());
 
 	}

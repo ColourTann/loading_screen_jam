@@ -7,11 +7,13 @@ import com.badlogic.gdx.utils.Align;
 public class TextWisp extends Particle{
 	public String text;
 	Color c = Colours.light;
+	public int width;
 	public TextWisp(String text, int x, int y) {
 		this.x=x;
 		this.y=y;
 		this.text=text;
 		setupLife(1);
+		width = TannFont.font.getWidth(text);		
 	}
 	boolean alphaMode=true;
 	public void disableAlpha(){
@@ -42,4 +44,6 @@ public class TextWisp extends Particle{
 		batch.setColor(c.r, c.g, c.b, alphaMode?ratio:1);
 		TannFont.font.draw(batch, text, (int)x, (int)y, Align.center);
 	}
+
+	
 }

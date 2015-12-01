@@ -22,7 +22,7 @@ public class Obstacle extends Actor{
 		this.type=type;
 		this.speed=speed;
 		setSize(type.region.getRegionWidth(), type.region.getRegionHeight());
-		setPosition(Main.width, Main.height/2);
+		setPosition(Main.width+3, Main.height/2);
 		if(type==ObstacleType.Spike){
 			setY(getY()+5);
 		}
