@@ -30,7 +30,7 @@ public class TurtleGame extends Minigame{
 	Turtle turtle;
 	float obstacleTicks=0;
 	private TurtleGame(){
-		super("snake", .4f);
+		super("snake", 1f);
 		Minigame.activeKeys.add(Input.Keys.UP);
 		Minigame.activeKeys.add(Input.Keys.DOWN);
 		Main.coloursUnlocked=2;
@@ -49,8 +49,8 @@ public class TurtleGame extends Minigame{
 		Draw.fillRectangle(batch, getX(), getY(), getWidth(), Main.height/2);
 		Draw.fillRectangle(batch, getX(), Main.height/2+ObstacleType.Spike.region.getRegionHeight()+5, getWidth(), Main.height/2);
 		batch.setColor(Colours.dark);
-		TannFont.font.draw(batch, "Score: "+score, 50, (int)(Main.height*.3f));
-		TannFont.font.draw(batch, "Highscore: "+highscore, 100, (int)(Main.height*.3f));
+		TannFont.font.draw(batch, "Score: "+score, (int)getX()+50, (int)getY()+(int)(Main.height*.3f));
+		TannFont.font.draw(batch, "Highscore: "+highscore, (int)getX()+100, (int)(getY()+Main.height*.3f));
 	}
 
 	@Override

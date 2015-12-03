@@ -3,12 +3,14 @@ package game.screens.minigames;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.utils.Array;
 
+import game.screens.minigames.space.SpaceGame;
 import game.screens.minigames.turtle.Obstacle;
 import game.screens.unlock.Unlock;
 import game.screens.unlock.UnlockBox;
 import game.util.Screen;
 
 public abstract class Minigame extends Screen{
+	static boolean allUnlocked;
 	protected int score =0, highscore =0;
 	public LoadingBar thisBar;
 	public abstract String getName();
@@ -25,19 +27,23 @@ public abstract class Minigame extends Screen{
 		this.speed=speed;
 		this.nextName=nextName;
 		
-		if(getUnlocks().length>0){
-			box = new UnlockBox(getName(), getUnlocks());
+		if(getUnlocks().length>0&&!allUnlocked){
+			box = new UnlockBox(getName(), getUnlocks(), this instanceof SpaceGame);
 			addActor(box);
 		}
 		else{
 			start();
 		}
+		if(this instanceof SpaceGame) {
+			allUnlocked=true;
+		}
+		
 	}
 	protected boolean started;
 	public void start(){
 		started=true;
 		setup();
-		if(nextName!=null)addLoadingBar(new LoadingBar(speed));
+		if(nextName!=null&&!allUnlocked)addLoadingBar(new LoadingBar(speed));
 	}
 	
 	public abstract void setup();
@@ -59,11 +65,15 @@ public abstract class Minigame extends Screen{
 			if(box!=null&&!started){
 				box.remove();
 				start();
+				return;
 			}
 		}
 		switch(keycode){
 		case Input.Keys.SPACE:
-			if(thisBar!=null&&thisBar.progress==1) nextGame();
+			if(thisBar==null||thisBar.progress==1) {
+				reset();
+				nextGame();
+			}
 			break;
 		}
 	}

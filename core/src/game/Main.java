@@ -4,6 +4,7 @@ import game.screens.InitialLoadingScreen;
 import game.screens.minigames.rat.RatGame;
 import game.screens.minigames.snake.SnakeGame;
 import game.screens.minigames.space.SpaceGame;
+import game.screens.minigames.turtle.TurtleGame;
 import game.screens.pause.InputBlocker;
 import game.screens.pause.PauseScreen;
 import game.util.Colours;
@@ -28,6 +29,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 
@@ -72,10 +74,10 @@ public class Main extends ApplicationAdapter {
 		});
 
 		setScale(scale);
-		//		setScreen(InitialLoadingScreen.get());
-		//		setScreen(SnakeGame.get());	
-		//		setScreen(TurtleGame.get());
-		setScreen(SpaceGame.get());
+		setScreen(InitialLoadingScreen.get());
+//		setScreen(SnakeGame.get());	
+//		setScreen(TurtleGame.get());
+//		setScreen(SpaceGame.get());
 
 	}
 
@@ -111,18 +113,23 @@ public class Main extends ApplicationAdapter {
 		this.state=state;
 	}
 	public enum TransitionType{LEFT, RIGHT};
-	public void setScreen(Screen screen, TransitionType type, Interpolation interp, float speed){
+	public void setScreen(final Screen screen, TransitionType type, Interpolation interp, float speed){
 		if(screen==currentScreen)return;
 		setScreen(screen);
+		RunnableAction ra = Actions.run(new Runnable() {
+			public void run() {
+				screen.setActive(true);
+			}
+		});
 		switch(type){
 		case LEFT:
 			screen.setPosition(Main.width, 0);
-			screen.addAction(Actions.moveTo(0, 0, speed, interp));
+			screen.addAction(Actions.sequence(Actions.moveTo(0, 0, speed, interp), ra));
 			previousScreen.addAction(Actions.moveTo(-Main.width, 0, speed, interp));
 			break;
 		case RIGHT:
 			screen.setPosition(-Main.width, 0);
-			screen.addAction(Actions.moveTo(0, 0, speed, interp));
+			screen.addAction(Actions.sequence(Actions.moveTo(0, 0, speed, interp), ra));
 			previousScreen.addAction(Actions.moveTo(Main.width, 0, speed, interp));
 			break;
 
@@ -131,12 +138,16 @@ public class Main extends ApplicationAdapter {
 	}
 
 	public void setScreen(Screen screen){
+		if(previousScreen!=null){
+			previousScreen.clearActions();
+			previousScreen.remove();
+		}
 		if(currentScreen!=null){
+			currentScreen.clearActions();
 			previousScreen=currentScreen;
 			currentScreen.setActive(false);
 		}
 		currentScreen=screen;
-		currentScreen.setActive(true);
 		stage.addActor(screen);
 
 	}

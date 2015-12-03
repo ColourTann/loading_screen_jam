@@ -55,7 +55,7 @@ lasers
   index: -1
 pixel
   rotate: false
-  xy: 222, 42
+  xy: 61, 9
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
@@ -116,9 +116,16 @@ shiptiny
   orig: 32, 32
   offset: 0, 0
   index: -1
-space/ship
+space/asteroid
   rotate: false
   xy: 2, 2
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+space/ship
+  rotate: false
+  xy: 12, 2
   size: 7, 8
   orig: 7, 8
   offset: 0, 0
@@ -139,14 +146,14 @@ spiral
   index: -1
 turtle/duck
   rotate: false
-  xy: 11, 3
+  xy: 21, 3
   size: 18, 7
   orig: 18, 7
   offset: 0, 0
   index: -1
 turtle/jump
   rotate: false
-  xy: 31, 3
+  xy: 41, 3
   size: 18, 7
   orig: 18, 7
   offset: 0, 0
@@ -167,14 +174,14 @@ turtle/spike
   index: -1
 turtle/walk0
   rotate: false
-  xy: 51, 3
+  xy: 222, 33
   size: 18, 7
   orig: 18, 7
   offset: 0, 0
   index: -1
 turtle/walk1
   rotate: false
-  xy: 222, 33
+  xy: 222, 24
   size: 18, 7
   orig: 18, 7
   offset: 0, 0

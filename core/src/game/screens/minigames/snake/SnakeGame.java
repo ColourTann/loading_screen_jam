@@ -2,10 +2,14 @@ package game.screens.minigames.snake;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Interpolation;
 
 import game.Main;
+import game.Main.TransitionType;
 import game.screens.minigames.LoadingBar;
 import game.screens.minigames.Minigame;
+import game.screens.minigames.space.SpaceGame;
+import game.screens.minigames.turtle.TurtleGame;
 import game.screens.testScreens.GameScreen;
 import game.screens.unlock.ColourUnlock;
 import game.screens.unlock.KeyUnlock;
@@ -26,7 +30,7 @@ public class SnakeGame extends Minigame{
 	public static final int scoreSize=9;
 	
 	private SnakeGame() {
-		super("rat", .04f);
+		super("defender", .6f);
 		Minigame.activeKeys.add(Input.Keys.LEFT);
 		Minigame.activeKeys.add(Input.Keys.RIGHT);
 		Main.coloursUnlocked=3;
@@ -86,6 +90,6 @@ public class SnakeGame extends Minigame{
 
 	@Override
 	protected void nextGame() {
-		
+		Main.self.setScreen(SpaceGame.get(), TransitionType.LEFT, Interpolation.pow2Out, .5f);
 	}
 }

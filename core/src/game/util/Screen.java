@@ -17,7 +17,7 @@ public abstract class Screen extends Group{
 	private static float shakeDrag=.005f;
 	private ArrayList<Particle> particles = new ArrayList<Particle>();
 	private ArrayList<Particle> newParticles = new ArrayList<Particle>();
-	boolean active = true;
+	boolean active = false;
 	public Screen() {
 		setSize(Main.width, Main.height);
 	}
@@ -37,8 +37,13 @@ public abstract class Screen extends Group{
 	public void act(float delta) {
 		if(Main.self.getState()==MainState.Paused)return;
 		if(active){
+			if(shakeMagnitude>.1){
 			setPosition((float)(Math.sin(Main.ticks*shakeFrequency)*shakeMagnitude), 
 					(float) (Math.cos((Main.ticks+100)*shakeFrequency)*shakeMagnitude));
+			}
+			else{
+				setPosition(0,0);
+			}
 		}
 		shakeMagnitude*=Math.pow(shakeDrag, delta);
 		tickParticles(delta);
