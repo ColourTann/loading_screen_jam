@@ -18,12 +18,13 @@ import game.util.TannFont;
 
 public class SnakeGame extends Minigame{
 	private static SnakeGame self;
-	public Grid grid;
-	public static final int scoreSize=9;
 	public static SnakeGame get(){
 		if(self==null) self= new SnakeGame();
 		return self;
 	}
+	public Grid grid;
+	public static final int scoreSize=9;
+	
 	private SnakeGame() {
 		super("rat", .04f);
 		Minigame.activeKeys.add(Input.Keys.LEFT);
@@ -43,7 +44,7 @@ public class SnakeGame extends Minigame{
 		batch.setColor(Colours.dark);
 		Draw.fillRectangle(batch, getX(), getY(), getWidth(), getHeight());
 		
-		batch.setColor(Colours.mixer);
+		batch.setColor(Colours.blue);
 		Draw.fillRectangle(batch, getX(), getY(), getWidth(), scoreSize);
 		
 		batch.setColor(Colours.light);
@@ -69,7 +70,7 @@ public class SnakeGame extends Minigame{
 	}
 	@Override
 	public Unlock[] getUnlocks() {
-		return new Unlock[]{new KeyUnlock('<'), new KeyUnlock('>'), new ColourUnlock("blue", Colours.mixer)};
+		return new Unlock[]{new KeyUnlock('<'), new KeyUnlock('>'), new ColourUnlock("blue", Colours.blue)};
 	}
 	@Override
 	public void keyPress(int keycode) {

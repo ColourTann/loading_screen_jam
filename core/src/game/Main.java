@@ -1,7 +1,9 @@
 package game;
 
 import game.screens.InitialLoadingScreen;
+import game.screens.minigames.rat.RatGame;
 import game.screens.minigames.snake.SnakeGame;
+import game.screens.minigames.space.SpaceGame;
 import game.screens.pause.InputBlocker;
 import game.screens.pause.PauseScreen;
 import game.util.Colours;
@@ -70,9 +72,10 @@ public class Main extends ApplicationAdapter {
 		});
 
 		setScale(scale);
-		setScreen(InitialLoadingScreen.get());
-//		setScreen(SnakeGame.get());	
-//		setScreen(TurtleGame.get());
+		//		setScreen(InitialLoadingScreen.get());
+		//		setScreen(SnakeGame.get());	
+		//		setScreen(TurtleGame.get());
+		setScreen(SpaceGame.get());
 
 	}
 
@@ -122,15 +125,20 @@ public class Main extends ApplicationAdapter {
 			screen.addAction(Actions.moveTo(0, 0, speed, interp));
 			previousScreen.addAction(Actions.moveTo(Main.width, 0, speed, interp));
 			break;
-		
+
 		}
 		previousScreen.addAction(Actions.after(Actions.removeActor()));
 	}
 
 	public void setScreen(Screen screen){
-		previousScreen=currentScreen;
+		if(currentScreen!=null){
+			previousScreen=currentScreen;
+			currentScreen.setActive(false);
+		}
 		currentScreen=screen;
+		currentScreen.setActive(true);
 		stage.addActor(screen);
+
 	}
 
 	@Override

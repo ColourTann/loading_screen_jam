@@ -37,7 +37,7 @@ public abstract class Minigame extends Screen{
 	public void start(){
 		started=true;
 		setup();
-		addLoadingBar(new LoadingBar(speed));
+		if(nextName!=null)addLoadingBar(new LoadingBar(speed));
 	}
 	
 	public abstract void setup();
@@ -63,7 +63,7 @@ public abstract class Minigame extends Screen{
 		}
 		switch(keycode){
 		case Input.Keys.SPACE:
-			if(thisBar.progress==1) nextGame();
+			if(thisBar!=null&&thisBar.progress==1) nextGame();
 			break;
 		}
 	}

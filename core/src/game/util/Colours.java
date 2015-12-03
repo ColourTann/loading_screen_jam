@@ -10,8 +10,8 @@ public class Colours {
 
 	public static final Color dark;
 	public static final Color light;
-	public static final Color mixer;
-	public static final Color fixer;
+	public static final Color blue;
+	public static final Color red;
 	
 	public static final Color white = new Color(1,1,1,1);
 	private static Pixmap p;
@@ -21,8 +21,8 @@ public class Colours {
 		
 		light = palette(0,0);
 		dark = palette(1,0);
-		mixer = palette(2,0);
-		fixer = palette(3,0);
+		blue = palette(2,0);
+		red = palette(3,0);
 	}
 	
 	public static Color palette(int x, int y){

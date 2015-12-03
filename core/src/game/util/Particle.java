@@ -1,11 +1,13 @@
 package game.util;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 public abstract class Particle {
 	public boolean dead;
 	public float x,y,dx,dy,angle,ratio;
 	private float life, startLife;
+	protected Color colour;
 	public abstract void tick(float delta);
 	public abstract void draw(Batch batch);
 	public void act(float delta){

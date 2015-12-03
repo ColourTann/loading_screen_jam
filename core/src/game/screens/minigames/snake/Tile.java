@@ -25,7 +25,7 @@ public class Tile extends Actor{
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
 		if(pellet){
-			batch.setColor(Colours.mixer);
+			batch.setColor(Colours.blue);
 			Draw.fillRectangle(batch, getX(), getY(), getWidth(), getHeight());
 			batch.setColor(Colours.light);
 			Draw.fillRectangle(batch, getX()+1, getY()+1, 1, 1);
@@ -84,7 +84,7 @@ public class Tile extends Actor{
 
 	static Tile[] tiles = new Tile[2];
 	public void drawSnake(Batch batch, boolean player, Tile previous, Tile next) {
-		batch.setColor(Colours.mixer);
+		batch.setColor(Colours.blue);
 		
 		Draw.fillRectangle(batch, getX(), getY(), getWidth(), getHeight());
 		batch.setColor(player?Colours.light:Colours.dark);

@@ -15,7 +15,8 @@ public class UnlockBox extends Group{
 	String name;
 	public UnlockBox(String name, Unlock[] unlocks) {
 		this.name=name;
-		setSize(gap*3+border*2+Unlock.width*2, gap*3+border*2+Unlock.height*2+top+bottom+extraText);
+		int rows = (unlocks.length+1)/2;
+		setSize(gap*3+border*2+Unlock.width*2, gap*(rows+1)+border*rows+Unlock.height*rows+top+bottom+extraText);
 		setPosition((int)(Main.width/2-getWidth()/2), (int)(Main.height/2-getHeight()/2));
 		for(int i=0;i<unlocks.length;i++){
 			Unlock u = unlocks[i];
@@ -36,10 +37,16 @@ public class UnlockBox extends Group{
 			textCol=Colours.light;
 			break;
 		case 3:
-			borderCol=Colours.mixer;
+			borderCol=Colours.blue;
 			backgroundCol=Colours.dark;
 			textCol=Colours.light;
 			break;
+		case 4:
+			borderCol=Colours.red;
+			backgroundCol=Colours.dark;
+			textCol=Colours.blue;
+			break;
+			
 
 		}
 		batch.setColor(borderCol);

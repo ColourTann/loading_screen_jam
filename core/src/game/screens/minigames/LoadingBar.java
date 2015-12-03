@@ -88,11 +88,16 @@ public class LoadingBar extends Group{
 			textCovered=Colours.dark;
 			break;
 		case 3:
-			bg=Colours.mixer;
+			bg=Colours.blue;
 			bar=Colours.light;
 			textUncovered=Colours.dark;
 			textCovered=Colours.dark;
 			break;
+		case 4:
+			bg=Colours.blue;
+			bar=Colours.light;
+			textUncovered=Colours.dark;
+			textCovered=Colours.dark;
 		}
 		batch.setColor(bg);
 		Draw.fillRectangle(batch, getX(), getY(), getWidth(), getHeight());
