@@ -1,6 +1,7 @@
 package game.screens.minigames.turtle;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.utils.Array;
@@ -16,6 +17,7 @@ import game.screens.unlock.Unlock;
 import game.util.Colours;
 import game.util.Draw;
 import game.util.Screen;
+import game.util.Sounds;
 import game.util.TannFont;
 
 public class TurtleGame extends Minigame{
@@ -104,6 +106,11 @@ public class TurtleGame extends Minigame{
 			o.remove();
 		}
 		obstacles.clear();
+	}
+
+	@Override
+	protected void startMusic() {
+		Sounds.playMusic(Sounds.get("turtle", Music.class));
 	}
 	
 

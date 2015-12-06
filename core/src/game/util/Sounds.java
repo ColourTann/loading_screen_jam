@@ -1,6 +1,7 @@
 package game.util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
@@ -15,14 +16,26 @@ public class Sounds {
 
 	public static void setup(){
 		//sfx//
-//		makeSound("sfx/win.wav", Sound.class);
-//		makeSound("sfx/jump0.wav", Sound.class);
-//		makeSound("sfx/land0.wav", Sound.class);
-//		
-//		//music//
-//		makeSound("sfx/ambience.ogg", Music.class);
-//		makeSound("sfx/1.ogg", Music.class);
-//		makeSound("sfx/2.ogg", Music.class);
+		makeSound("sfx/loaded.ogg", Sound.class);
+		makeSound("sfx/point.ogg", Sound.class);
+		
+		makeSound("sfx/snake_enemycrash.ogg", Sound.class);
+		makeSound("sfx/snake_playercrash.ogg", Sound.class);
+		makeSound("sfx/snake_move.ogg", Sound.class);
+		
+		makeSound("sfx/space_shoot.ogg", Sound.class);
+		makeSound("sfx/space_stationhit.ogg", Sound.class);
+		makeSound("sfx/space_warp.ogg", Sound.class);
+		makeSound("sfx/space_asteroidkill.ogg", Sound.class);
+		
+		makeSound("sfx/turtle_die.ogg", Sound.class);
+		makeSound("sfx/turtle_duck.ogg", Sound.class);
+		makeSound("sfx/turtle_jump.ogg", Sound.class);
+		
+		//music//
+		makeSound("music/turtle.ogg", Music.class);
+		makeSound("music/snake.ogg", Music.class);
+		makeSound("music/space.ogg", Music.class);
 		
 		//stuff to attempt to load sounds properly//
 		am.finishLoading();
@@ -39,8 +52,9 @@ public class Sounds {
 	}
 	
 	public static <T> T get(String name, Class<T> type){
-		name="sfx/"+name;
-		if(type==Sound.class) name=name+".wav";
+		String folder = type==Sound.class?"sfx":"music";
+		name=folder+"/"+name;
+		if(type==Sound.class) name=name+".ogg";
 		if(type==Music.class) name=name+".ogg";
 		return am.get(name, type);
 	}
@@ -70,6 +84,7 @@ public class Sounds {
 		if(previousMusic!=null)previousMusic.stop();
 		currentMusic=m;
 		currentMusic.play();
+		currentMusic.setLooping(true);
 		updateMusicVolume();
 	}
 	
@@ -101,5 +116,15 @@ public class Sounds {
 			System.out.println(newVolume);
 			music.setVolume(newVolume);
 		}
+	}
+
+	static HashMap<String, Sound> soundMap = new HashMap<String, Sound>();
+	public static void playSound(String string) {
+		Sound s = soundMap.get(string);
+		if(s==null){
+			s=get(string, Sound.class);
+			soundMap.put(string, s);
+		}
+		s.play(Slider.SFX.getValue());		
 	}
 }

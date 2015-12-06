@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import game.Main;
 import game.util.Colours;
 import game.util.Draw;
+import game.util.Sounds;
 import game.util.TextWisp;
 
 public class Turtle extends Actor{
@@ -41,6 +42,7 @@ public class Turtle extends Actor{
 		if(currentState!=State.Walk) return;
 		currentState=State.Duck;
 		stateTick=.5f;
+//		Sounds.playSound("turtle_duck");
 	}
 
 	private void jump() {
@@ -48,6 +50,7 @@ public class Turtle extends Actor{
 		if(currentState!=State.Walk) return;
 		currentState=State.Jump;
 		dy=40;
+//		Sounds.playSound("turtle_duck");
 	}
 
 	@Override

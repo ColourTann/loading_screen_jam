@@ -12,6 +12,7 @@ import game.Main;
 import game.util.Colours;
 import game.util.Draw;
 import game.util.Noise;
+import game.util.Sounds;
 import game.util.TannFont;
 
 public class LoadingBar extends Group{

@@ -9,6 +9,7 @@ import game.Main;
 import game.screens.minigames.LoadingBar;
 import game.screens.minigames.Minigame;
 import game.screens.minigames.snake.Tile.TileEnterResult;
+import game.util.Sounds;
 import game.util.TannFont;
 import game.util.TextWisp;
 
@@ -75,6 +76,9 @@ public abstract class Snakey extends Actor{
 			dy=-1; dx=0;
 			break;
 		}
+		if(this instanceof PlayerSnakey){
+			Sounds.playSound("snake_move");
+		}
 	}
 
 	void enterTile(Tile t){
@@ -134,6 +138,14 @@ public abstract class Snakey extends Actor{
 		wisp.disableAlpha();
 		SnakeGame.get().addParticle(wisp);
 		dead=true;
+		
+//		if(this instanceof PlayerSnakey){
+//			Sounds.playSound("snake_playercrash");
+//		}
+//		else{
+//			Sounds.playSound("snake_enemycrash");
+//		}
+		
 	}
 
 }

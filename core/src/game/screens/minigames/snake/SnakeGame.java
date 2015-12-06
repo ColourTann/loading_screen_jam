@@ -1,6 +1,7 @@
 package game.screens.minigames.snake;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Interpolation;
 
@@ -18,6 +19,7 @@ import game.screens.unlock.UnlockBox;
 import game.util.Colours;
 import game.util.Draw;
 import game.util.Screen;
+import game.util.Sounds;
 import game.util.TannFont;
 
 public class SnakeGame extends Minigame{
@@ -91,5 +93,10 @@ public class SnakeGame extends Minigame{
 	@Override
 	protected void nextGame() {
 		Main.self.setScreen(SpaceGame.get(), TransitionType.LEFT, Interpolation.pow2Out, .5f);
+	}
+
+	@Override
+	protected void startMusic() {
+		Sounds.playMusic(Sounds.get("snake", Music.class));
 	}
 }

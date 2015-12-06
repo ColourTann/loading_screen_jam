@@ -1,7 +1,6 @@
 package game;
 
 import game.screens.InitialLoadingScreen;
-import game.screens.minigames.rat.RatGame;
 import game.screens.minigames.snake.SnakeGame;
 import game.screens.minigames.space.SpaceGame;
 import game.screens.minigames.turtle.TurtleGame;
@@ -17,6 +16,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
@@ -48,6 +48,7 @@ public class Main extends ApplicationAdapter {
 	public static float ticks;
 	public static int coloursUnlocked=2;
 	public enum MainState{Normal, Paused}
+	public static final int version = 4;
 	@Override
 	public void create () {
 		self=this;
@@ -74,10 +75,18 @@ public class Main extends ApplicationAdapter {
 		});
 
 		setScale(scale);
+		
+
+		
 		setScreen(InitialLoadingScreen.get());
-//		setScreen(SnakeGame.get());	
-//		setScreen(TurtleGame.get());
+		
+//		setScreen(TurtleGame.get())
+		
+//		setScreen(SnakeGame.get());
+//		Sounds.playMusic(Sounds.get("snake", Music.class));
+//;
 //		setScreen(SpaceGame.get());
+//		Sounds.playMusic(Sounds.get("space", Music.class));
 
 	}
 

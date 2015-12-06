@@ -8,6 +8,7 @@ import game.screens.minigames.turtle.Obstacle;
 import game.screens.unlock.Unlock;
 import game.screens.unlock.UnlockBox;
 import game.util.Screen;
+import game.util.Sounds;
 
 public abstract class Minigame extends Screen{
 	static boolean allUnlocked;
@@ -45,6 +46,16 @@ public abstract class Minigame extends Screen{
 		setup();
 		if(nextName!=null&&!allUnlocked)addLoadingBar(new LoadingBar(speed));
 	}
+	
+	@Override
+	public void setActive(boolean active) {
+		super.setActive(active);
+		if(active){
+			startMusic();
+		}
+	}
+	
+	protected abstract void startMusic();
 	
 	public abstract void setup();
 	

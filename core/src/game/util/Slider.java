@@ -20,8 +20,8 @@ public class Slider extends Actor{
 	final static int gap=1;
 	
 	//preset sliders//
-	public static Slider SFX=  new Slider("SFX", .5f, Colours.dark, Colours.light);
-	public static Slider music=  new Slider("Music", .5f, Colours.dark, Colours.light);
+	public static Slider SFX=  new Slider("sfx", .5f, Colours.dark, Colours.light);
+	public static Slider music=  new Slider("music", .5f, Colours.dark, Colours.light);
 	static{
 		music.addSlideAction(new Runnable() {
 			

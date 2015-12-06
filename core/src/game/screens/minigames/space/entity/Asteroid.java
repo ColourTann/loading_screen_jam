@@ -8,6 +8,7 @@ import game.screens.minigames.space.SpaceGame;
 import game.screens.minigames.space.entity.SpaceEntity.HitResult;
 import game.util.Colours;
 import game.util.Draw;
+import game.util.Sounds;
 
 public class Asteroid extends SpaceEntity{
 	private static TextureRegion image = Main.atlas.findRegion("space/asteroid");
@@ -41,7 +42,10 @@ public class Asteroid extends SpaceEntity{
 	@Override
 	public void damage(int damage) {
 		super.damage(damage);
-		if(dead)SpaceGame.get().incrementScore();
+		if(dead){
+			Sounds.playSound("space_asteroidkill");
+			SpaceGame.get().incrementScore();
+		}
 	}
 
 	@Override

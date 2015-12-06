@@ -11,9 +11,13 @@ import game.util.Colours;
 import game.util.Draw;
 import game.util.Screen;
 import game.util.Slider;
+import game.util.TannFont;
+
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.utils.Align;
 
 public class PauseScreen extends Group{
 	private static int w=120,h=70;
@@ -26,14 +30,14 @@ public class PauseScreen extends Group{
 	private PauseScreen(){
 		setSize(w,h);
 		setPosition(Main.width/2-w/2, Main.height/2-h/2);
-		addTransitionButton("restart", SnakeGame.get(), (int)(getWidth()/2), getY(.9f), 40);
 		
+		addAttribution("willfor: music/sfx", "https://twitter.com/thewillformusic", (int)(getWidth()/2), getY(.81f), 70);
+		addAttribution("tann: the rest", "https://twitter.com/colourtann", (int)(getWidth()/2), getY(.63f), 70);
 		
-		
-		Slider.SFX.setPosition(w/2-Slider.SFX.getWidth()/2, getY(.3f));
+		Slider.SFX.setPosition(w/2-Slider.SFX.getWidth()/2, getY(.25f));
 		addActor(Slider.SFX);
 		
-		Slider.music.setPosition(w/2-Slider.SFX.getWidth()/2, getY(.55f));
+		Slider.music.setPosition(w/2-Slider.SFX.getWidth()/2, getY(.4f));
 		addActor(Slider.music);
 		
 		int numScales=5;
@@ -52,7 +56,7 @@ public class PauseScreen extends Group{
 		t.setPosition((int)(x-t.getWidth()/2), (int)(y-t.getHeight()/2));
 		addActor(t);
 	}
-	
+
 	private void addTransitionButton(String name, final Screen transitionTo, int x, int y, int width){
 		Button t = new Button(name, width);
 		
@@ -67,6 +71,18 @@ public class PauseScreen extends Group{
 		addActor(t);
 	}
 
+	private void addAttribution(String text, final String url, int x, int y, int width){
+		Button b = new Button(text, width);
+		b.setPosition(x-b.getWidth()/2, y);
+		b.setClickAction(new Runnable() {
+			@Override
+			public void run() {
+				Gdx.net.openURI(url);
+			}
+		});
+		addActor(b);		
+	}
+	
 	private int getY(float ratio){
 		return (int) (getHeight()*ratio);
 	}
@@ -76,6 +92,11 @@ public class PauseScreen extends Group{
 		batch.setColor(Colours.light);
 		Draw.fillRectangle(batch, getX(), getY(), getWidth(), getHeight());
 		Border.draw(batch, getX(), getY(), getWidth(), getHeight(), false);
+		
+		batch.setColor(Colours.dark);
+		TannFont.font.draw(batch, "v"+Main.version, (int)getX()+2, (int)(getY()-1+getHeight()-TannFont.font.getLineHeight()));
+//		TannFont.font.draw(batch, "made by", (int)(getX()+getWidth()/2), (int)getY()+(getY(.9f)), Align.center);
+		
 		super.draw(batch, parentAlpha);
 	}
 }

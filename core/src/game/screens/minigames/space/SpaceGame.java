@@ -1,5 +1,6 @@
 package game.screens.minigames.space;
 
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.utils.Array;
@@ -19,6 +20,7 @@ import game.screens.unlock.KeyUnlock;
 import game.screens.unlock.Unlock;
 import game.util.Colours;
 import game.util.Draw;
+import game.util.Sounds;
 import game.util.TannFont;
 
 public class SpaceGame extends Minigame{
@@ -171,6 +173,11 @@ public class SpaceGame extends Minigame{
 	public void addProjectile(Projectile projectile) {
 		projectiles.add(projectile);
 		addActor(projectile);
+	}
+
+	@Override
+	protected void startMusic() {
+		Sounds.playMusic(Sounds.get("space", Music.class));
 	}
 
 }

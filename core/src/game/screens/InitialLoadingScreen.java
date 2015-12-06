@@ -66,5 +66,9 @@ public class InitialLoadingScreen extends Minigame{
 
 	@Override
 	public void resetGame() {
+	}
+
+	@Override
+	protected void startMusic() {
 	}	
 }

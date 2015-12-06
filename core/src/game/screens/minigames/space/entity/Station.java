@@ -9,6 +9,7 @@ import game.Main;
 import game.screens.minigames.space.SpaceGame;
 import game.util.Colours;
 import game.util.Draw;
+import game.util.Sounds;
 
 public class Station extends SpaceEntity{
 	private static TextureRegion image = Main.atlas.findRegion("space/station");
@@ -29,6 +30,7 @@ public class Station extends SpaceEntity{
 			damageShields();
 			damage--;
 		}
+		Sounds.playSound("space_stationhit");
 		super.damage(damage);
 		if(dead){
 			SpaceGame.get().addAction(Actions.delay(1, Actions.run(new Runnable() {

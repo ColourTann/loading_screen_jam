@@ -1,5 +1,7 @@
 package game.screens.minigames.snake;
 
+import game.util.Sounds;
+
 public class PlayerSnakey extends Snakey{
 	int nextKeycode=-1;
 	boolean turned;

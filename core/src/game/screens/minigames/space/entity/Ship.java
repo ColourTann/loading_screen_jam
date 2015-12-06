@@ -14,6 +14,7 @@ import game.screens.minigames.space.projectile.Pellet;
 import game.screens.minigames.space.projectile.Projectile;
 import game.util.Colours;
 import game.util.Draw;
+import game.util.Sounds;
 
 public class Ship extends SpaceEntity{
 	private static TextureRegion image = Main.atlas.findRegion("space/ship");
@@ -117,7 +118,7 @@ public class Ship extends SpaceEntity{
 		rotation+=Math.PI;
 		speed=5;
 		flipTimer=.3f;
-		
+		Sounds.playSound("space_warp");
 	}
 
 	void shoot(){
@@ -126,6 +127,7 @@ public class Ship extends SpaceEntity{
 		for(int i=0;i<10;i++) SpaceGame.get().addProjectile(new Pellet(getX(), getY(), rotation));
 		speed-=1;
 		SpaceGame.get().shake(1);
+		Sounds.playSound("space_shoot");
 	}
 	
 	@Override
