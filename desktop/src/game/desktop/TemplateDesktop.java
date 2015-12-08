@@ -17,10 +17,10 @@ public class TemplateDesktop {
 		config.width=Main.width;
 		config.height=Main.height;
 		
-		Settings settings = new Settings();
-		settings.combineSubdirectories = true;
-		TexturePacker.process(settings, "../images", "../core/assets", "atlas_image");
-		config.title="Template";
+//		Settings settings = new Settings();
+//		settings.combineSubdirectories = true;
+//		TexturePacker.process(settings, "../images", "../core/assets", "atlas_image");
+		config.title="New Game Loaded";
 		config.addIcon("icon.png", FileType.Internal);
 
 		
